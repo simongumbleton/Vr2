@@ -4,7 +4,7 @@ import sys
 import asyncio
 
 import tkinter
-from tkinter import *
+
 from tkinter import filedialog
 
 import fnmatch

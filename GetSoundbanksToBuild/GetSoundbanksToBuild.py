@@ -1,12 +1,6 @@
-import os
-import sys
 
-#import trollius as asyncio
-#from trollius import *
 import asyncio
 
-import tkinter #import Tk
-from tkinter import *
 
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
 from ak_autobahn import AkComponent

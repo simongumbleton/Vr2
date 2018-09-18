@@ -1,7 +1,8 @@
 import shutil, os
-import Tkinter #import Tk
-import tkFileDialog
-import tkMessageBox
+import tkinter
+from tkinter import filedialog as tkFileDialog
+from tkinter import messagebox as tkMessageBox
+
 
 import fnmatch
 
@@ -15,7 +16,7 @@ pattern = '*.wav'
 
 
 def askUserForImportDirectory():
-    root = Tkinter.Tk()
+    root = tkinter.Tk()
     root.withdraw()
     root.update()
     dir = tkFileDialog.askdirectory(title = "Hello pick a folder")

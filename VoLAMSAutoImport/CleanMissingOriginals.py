@@ -1,8 +1,9 @@
 import os
 import sys
 
-import trollius as asyncio
-from trollius import From
+#import trollius as asyncio
+import asyncio
+#from trollius import From
 
 
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
@@ -62,7 +63,7 @@ class MyComponent(AkComponent):
                 }
             }
             try:
-                x = yield self.call(WAAPI_URI.ak_wwise_ui_getselectedobjects, {}, **selectedObjectArgs)
+                x = yield from self.call(WAAPI_URI.ak_wwise_ui_getselectedobjects, {}, **selectedObjectArgs)
             except Exception as ex:
                 print("call error: {}".format(ex))
             else:
@@ -81,7 +82,7 @@ class MyComponent(AkComponent):
                 }
             }
             try:
-                res = yield From(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
             except Exception as ex:
                 print("call error: {}".format(ex))
             else:
@@ -99,7 +100,7 @@ class MyComponent(AkComponent):
                 }
             }
             try:
-                res = yield From(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
             except Exception as ex:
                 print("call error: {}".format(ex))
             else:
@@ -113,7 +114,7 @@ class MyComponent(AkComponent):
                 }
             }
             try:
-                res = yield From(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
             except Exception as ex:
                 print("call error: {}".format(ex))
             else:
@@ -132,7 +133,7 @@ class MyComponent(AkComponent):
         def deleteWwiseObject(object):
             args = {"object":object}
             try:
-                yield self.call(WAAPI_URI.ak_wwise_core_object_delete, {}, **args)
+                yield from self.call(WAAPI_URI.ak_wwise_core_object_delete, {}, **args)
             except Exception as ex:
                 print("call error: {}".format(ex))
 
@@ -149,7 +150,7 @@ class MyComponent(AkComponent):
                 }
             }
             try:
-                res = yield From(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
             except Exception as ex:
                 print("call error: {}".format(ex))
                 cancelUndoGroup()
@@ -186,7 +187,7 @@ class MyComponent(AkComponent):
 
         ###### Main logic flow #########
         try:
-            res = yield From(self.call(WAAPI_URI.ak_wwise_core_getinfo))  # RPC call without arguments
+            res = yield from self.call(WAAPI_URI.ak_wwise_core_getinfo)  # RPC call without arguments
         except Exception as ex:
             print("call error: {}".format(ex))
         else:
@@ -219,20 +220,20 @@ class MyComponent(AkComponent):
         MyComponent.ImportAudioFilePath = os.path.abspath(pathToSectionFiles)
 
 
-        yield SetupImportParentObject(MyComponent.Input_ParentObjectName)
+        SetupImportParentObject(MyComponent.Input_ParentObjectName)
 
         #yield getIDofParent(MyComponent.ActorMixerPath,MyComponent.Input_ParentObjectName)
-        yield getAudioFilesInWwise(MyComponent.parentID)
+        getAudioFilesInWwise(MyComponent.parentID)
         createListOfBrokenAudio(MyComponent.WwiseQueryResults)
 
         for x in MyComponent.WwiseAudioMissingOriginals:
             name = str(x["name"])
-            yield getWwiseEventByName(name)
-            yield deleteWwiseObject(x["id"])
+            getWwiseEventByName(name)
+            deleteWwiseObject(x["id"])
 
         for x in MyComponent.WwiseEventsToDelete:
             id = str(x["id"])
-            yield deleteWwiseObject(id)
+            deleteWwiseObject(id)
 
         numberOfFilesCleaned = len(MyComponent.WwiseAudioMissingOriginals)
         print(str(numberOfFilesCleaned) + " Files cleaned from " + MyComponent.Input_ParentObjectName)

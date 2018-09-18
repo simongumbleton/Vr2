@@ -1,8 +1,7 @@
 import os
 import sys
 
-import trollius as asyncio
-from trollius import From
+import asyncio
 
 
 import fnmatch
@@ -107,7 +106,7 @@ class MyComponent(AkComponent):
                 }
             }
             try:
-                res = yield From(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
             except Exception as ex:
                 print("call error: {}".format(ex))
                 cancelUndoGroup()
@@ -201,7 +200,7 @@ class MyComponent(AkComponent):
 
         def importAudioFiles(args):
             try:
-                yield self.call(WAAPI_URI.ak_wwise_core_audio_import, {}, **args)
+                yield from self.call(WAAPI_URI.ak_wwise_core_audio_import, {}, **args)
             except Exception as ex:
                 print("call error: {}".format(ex))
                 MyComponent.ImportOperationSuccess = False
@@ -222,7 +221,7 @@ class MyComponent(AkComponent):
                 }
             }
             try:
-                res = yield From(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
             except Exception as ex:
                 print("call error: {}".format(ex))
                 cancelUndoGroup()
@@ -279,7 +278,7 @@ class MyComponent(AkComponent):
 ###################  Main script flow  ###################
         #### Establish Wwise connection
         try:
-            res = yield From(self.call(WAAPI_URI.ak_wwise_core_getinfo))  # RPC call without arguments
+            res = yield from self.call(WAAPI_URI.ak_wwise_core_getinfo)  # RPC call without arguments
         except Exception as ex:
             print("call error: {}".format(ex))
         else:
@@ -316,11 +315,11 @@ class MyComponent(AkComponent):
         beginUndoGroup()
 
         ## Get the Section work unit object and store ID and path
-        yield SetupImportParentObject(MyComponent.INPUT_SectionName)
+        SetupImportParentObject(MyComponent.INPUT_SectionName)
 
         ## Main import function - Takes the ID of an object, to import files under.
         ## This method calls several other methods as it executes
-        yield ImportIntoWwiseUnderParentObject(MyComponent.parentID)
+        ImportIntoWwiseUnderParentObject(MyComponent.parentID)
 
         exit()
 
