@@ -1,10 +1,5 @@
-import os
-import sys
 
 import asyncio
-
-import tkinter
-from tkinter import *
 
 from autobahn.asyncio.wamp import ApplicationRunner
 from ak_autobahn import AkComponent
@@ -17,8 +12,8 @@ class MyComponent(AkComponent):
 
 
     def onJoin(self, details):
-        ###### Function definitions #########
 
+############# Function definitions #########################################
         def exit():
             self.leave()
 
@@ -29,15 +24,38 @@ class MyComponent(AkComponent):
             self.call(WAAPI_URI.ak_wwise_core_undo_cancelgroup)
 
         def endUndoGroup():
-            undoArgs = {"displayName": "Script Auto Importer"}
+            undoArgs = {"displayName": "My Waapi Script"}
             self.call(WAAPI_URI.ak_wwise_core_undo_endgroup, {}, **undoArgs)
 
         def saveWwiseProject():
             self.call(WAAPI_URI.ak_wwise_core_project_save)
 
+        def getAudioFilesInWwise(IDorPath):
+            #print("Get a list of the audio files currently in the project, under the selected object")
+            arguments = {
+                "from": {"path": [IDorPath]},
+                "transform": [
+                    {"select": ["descendants"]},
+                    {"where":["type:isIn",["Sound"]]}
+                ],
+                "options": {
+                    "return": ["id","type", "name", "path", "sound:originalWavFilePath", "isPlayable","audioSource:playbackDuration"]
+                }
+            }
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+                return 0
+            else:
+                return res.kwresults["return"]
+
+############## End of Function definitions ##############################################
 
 
-        ###### Main logic flow #########
+
+############### Main Script logic flow ####################################################
+        ## First try to connect to wwise to get Wwise info
         try:
             res = yield from self.call(WAAPI_URI.ak_wwise_core_getinfo)  # RPC call without arguments
         except Exception as ex:
@@ -47,11 +65,20 @@ class MyComponent(AkComponent):
             print("Hello {} {}".format(res.kwresults['displayName'], res.kwresults['version']['displayName']))
 
 
-        #####  Do Some Cool stuff here #######
+
+    ###########  Do Some Cool stuff here ##############
+
+        beginUndoGroup()
+
+        # Get all the audio files from a Wwise path
+        listOfAudioFiles = yield from getAudioFilesInWwise("\\Actor-Mixer Hierarchy\\")
+        print(listOfAudioFiles)
+
+        endUndoGroup()
 
 
-
-
+    ############### Exit  #############################
+        saveWwiseProject()
         exit()
 
 
