@@ -27,7 +27,7 @@ class MyComponent(AkComponent):
 #args for audio import
     ImportAudioFilePath = ""    #full path to root folder for files to import
 
-    INPUT_SectionName = "Foley"      #the section name, from BAT file. Use to find actor mixer and events parent for importing
+    INPUT_SectionName = "Drama_Foley"      #the section name, from BAT file. Use to find actor mixer and events parent for importing
 
     ImportLanguage = "SFX" #Default language for Wwise projects, Or SFX
 
@@ -197,6 +197,8 @@ class MyComponent(AkComponent):
 
             sectionActorMixer = "<Actor-Mixer>"+MyComponent.INPUT_SectionName+"\\"
 
+            eventSubPath = objectPath.replace("<Actor-Mixer>", "")
+
             importFilelist.append(
                 {
                     "audioFile": fileList,
@@ -214,7 +216,7 @@ class MyComponent(AkComponent):
                     "notes":"This object was auto imported",
                     "@IsStreamingEnabled": MyComponent.OPTION_IsStreaming,
                     "@IsZeroLantency": MyComponent.OPTION_IsStreaming,
-                    "event": eventPath+"\\"+os.path.basename(audiofilename)+"@Play"
+                    "event": eventPath+"\\"+eventSubPath+os.path.basename(audiofilename)+"@Play"
                     #,"ErrorTest":"Failme"
                     },
                 "imports": importFilelist
@@ -270,8 +272,8 @@ class MyComponent(AkComponent):
             if parID != None:
                 success = True
             if success:
-                #yield from getExistingAudioInWwise(str(parID))
-                #yield from createExistingAudioList(MyComponent.WwiseQueryResults)
+                yield from getExistingAudioInWwise(str(parID))
+                createExistingAudioList(MyComponent.WwiseQueryResults)
                 setupAudioFilePath()
                 count = 0
                 for file in MyComponent.ImportAudioFileList:
@@ -290,12 +292,12 @@ class MyComponent(AkComponent):
                 return
 
             if (MyComponent.ImportOperationSuccess):
-                saveWwiseProject()
-                endUndoGroup()
+                #endUndoGroup()
+                #saveWwiseProject()
                 print("Import operation success. "+str(count)+" new files imported.")
             else:
                 print("Import operation failed! Check log for errors!")
-                endUndoGroup()
+                #endUndoGroup()
 
 ###################  Main script flow  ###################
         #### Establish Wwise connection
@@ -326,8 +328,6 @@ class MyComponent(AkComponent):
 
         sourceFiles = setupSourceFileList(sourceDir)
 
-        beginUndoGroup()
-
 
         #### Construct the import audio file path. Use Section name from args
         ## Go up from the script to the dir shared with the Wwise project
@@ -351,6 +351,9 @@ class MyComponent(AkComponent):
         ## Main import function - Takes the ID of an object, to import files under.
         ## This method calls several other methods as it executes
         yield from ImportIntoWwiseUnderParentObject(MyComponent.parentID)
+
+        endUndoGroup()
+        saveWwiseProject()
 
         exit()
 
