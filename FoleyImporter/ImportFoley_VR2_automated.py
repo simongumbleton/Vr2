@@ -177,10 +177,15 @@ class MyComponent(AkComponent):
             str_AudioFileName = str(audiofilename).replace('\\','/')
             originalsSubDir = str_AudioFileName.replace(str_InputFilePath,'')
 
+            fileName = os.path.basename(originalsSubDir)
             # Just get the directory name from the audio file path
             originalsSubDir = os.path.dirname(originalsSubDir)
             if originalsSubDir == "/":
                 originalsSubDir = ""
+
+            AMs = fileName.rsplit('_',2)
+            Character = AMs[1]
+            Track = AMs[2]
 
             baseDirName = os.path.basename(originalsSubDir)
 
@@ -194,6 +199,8 @@ class MyComponent(AkComponent):
                 objectPath = "<Actor-Mixer>"+baseDirName+"\\"
             else:
                 objectPath = ""
+
+            objectPath += "<Actor-Mixer>"+Character+"\\" + "<Actor-Mixer>"+Track+"\\"
 
             sectionActorMixer = "<Actor-Mixer>"+MyComponent.INPUT_SectionName+"\\"
 
