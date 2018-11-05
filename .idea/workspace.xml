@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a9fbde4f-b412-43eb-9183-ca01beb9169c" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py" afterPath="$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py" />
+      <change beforePath="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py" afterPath="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,31 +14,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AutoImport_Foley.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py">
+      <file leaf-file-name="GetSoundbanksToBuild.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-32">
-              <caret line="120" column="8" lean-forward="false" selection-start-line="120" selection-start-column="8" selection-end-line="125" selection-end-column="24" />
+            <state relative-caret-position="479">
+              <caret line="102" column="51" lean-forward="false" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="51" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#1#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImportFoley_VR2_automated.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py">
+      <file leaf-file-name="GetSoundbanks_sample.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanks_sample.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="342" column="87" lean-forward="false" selection-start-line="342" selection-start-column="66" selection-end-line="342" selection-end-column="87" />
+            <state relative-caret-position="163">
+              <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="34" selection-end-column="5" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#29#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="waapi.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/waapi.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -56,17 +73,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/CopyMatchingFiles/CopyMatchingFiles.py" />
-        <option value="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py" />
         <option value="$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py" />
         <option value="$PROJECT_DIR$/VoLAMSAutoImport/CleanMissingOriginals.py" />
         <option value="$PROJECT_DIR$/_waapiTemplateScript.py" />
         <option value="$PROJECT_DIR$/VoLAMSAutoImport/ImportNewAudioFilesAsDialogue_VR2_automated.py" />
         <option value="$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py" />
+        <option value="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanks_sample.py" />
+        <option value="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="163" />
+    <option name="x" value="28" />
     <option name="y" value="23" />
     <option name="width" value="1090" />
     <option name="height" value="777" />
@@ -86,7 +104,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -104,10 +121,21 @@
               <item name="Vr2" type="462c0819:PsiDirectoryNode" />
               <item name="FoleyImporter" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Vr2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Vr2" type="462c0819:PsiDirectoryNode" />
+              <item name="GetSoundbanksToBuild" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Vr2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Vr2" type="462c0819:PsiDirectoryNode" />
+              <item name="VoLAMSAutoImport" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -131,7 +159,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ImportFoley_VR2_automated">
+  <component name="RunManager" selected="Python.GetSoundbanksToBuild">
     <configuration name="AutoImport_Foley" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -150,19 +178,19 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="CleanMissingOriginals" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="GetSoundbanksToBuild" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/VoLAMSAutoImport" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GetSoundbanksToBuild" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Vr2" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VoLAMSAutoImport/CleanMissingOriginals.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -223,19 +251,19 @@
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.CleanMissingOriginals" />
-      <item index="1" class="java.lang.String" itemvalue="Python.ImportNewAudioFilesAsDialogue_VR2_automated" />
-      <item index="2" class="java.lang.String" itemvalue="Python._waapiTemplateScript" />
-      <item index="3" class="java.lang.String" itemvalue="Python.AutoImport_Foley" />
-      <item index="4" class="java.lang.String" itemvalue="Python.ImportFoley_VR2_automated" />
+      <item index="0" class="java.lang.String" itemvalue="Python.ImportNewAudioFilesAsDialogue_VR2_automated" />
+      <item index="1" class="java.lang.String" itemvalue="Python._waapiTemplateScript" />
+      <item index="2" class="java.lang.String" itemvalue="Python.AutoImport_Foley" />
+      <item index="3" class="java.lang.String" itemvalue="Python.ImportFoley_VR2_automated" />
+      <item index="4" class="java.lang.String" itemvalue="Python.GetSoundbanksToBuild" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.ImportFoley_VR2_automated" />
-        <item index="1" class="java.lang.String" itemvalue="Python.AutoImport_Foley" />
-        <item index="2" class="java.lang.String" itemvalue="Python._waapiTemplateScript" />
-        <item index="3" class="java.lang.String" itemvalue="Python.ImportNewAudioFilesAsDialogue_VR2_automated" />
-        <item index="4" class="java.lang.String" itemvalue="Python.CleanMissingOriginals" />
+        <item index="0" class="java.lang.String" itemvalue="Python.GetSoundbanksToBuild" />
+        <item index="1" class="java.lang.String" itemvalue="Python.ImportFoley_VR2_automated" />
+        <item index="2" class="java.lang.String" itemvalue="Python.AutoImport_Foley" />
+        <item index="3" class="java.lang.String" itemvalue="Python._waapiTemplateScript" />
+        <item index="4" class="java.lang.String" itemvalue="Python.ImportNewAudioFilesAsDialogue_VR2_automated" />
       </list>
     </recent_temporary>
   </component>
@@ -256,18 +284,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="163" y="23" width="1090" height="777" extended-state="0" />
+    <frame x="28" y="23" width="1090" height="777" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18615529" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2581852" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29912025" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29912025" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.398827" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.398827" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -276,6 +304,25 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991204" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29912025" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2581852" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991204" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.398827" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -283,11 +330,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py</url>
-          <line>190</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py</url>
           <line>127</line>
@@ -298,15 +340,55 @@
           <line>179</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py</url>
+          <line>145</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py</url>
+          <line>147</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="20" />
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1800">
+          <caret line="120" column="8" lean-forward="false" selection-start-line="120" selection-start-column="8" selection-end-line="125" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5130">
+          <caret line="342" column="87" lean-forward="false" selection-start-line="342" selection-start-column="66" selection-end-line="342" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1800">
@@ -443,7 +525,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1#15#0" expanded="false" />
+            <element signature="e#1#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -484,7 +566,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1#15#0" expanded="false" />
+            <element signature="e#1#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -511,7 +593,7 @@
         <state relative-caret-position="600">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="e#1#15#0" expanded="false" />
+            <element signature="e#1#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -531,7 +613,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1#15#0" expanded="false" />
+            <element signature="e#1#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -547,23 +629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1#15#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/CleanMissingOriginals.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="88" column="16" lean-forward="false" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -588,9 +653,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/CleanMissingOriginals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="88" column="16" lean-forward="false" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1244">
+          <caret line="342" column="87" lean-forward="false" selection-start-line="342" selection-start-column="66" selection-end-line="342" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-32">
+        <state relative-caret-position="0">
           <caret line="120" column="8" lean-forward="false" selection-start-line="120" selection-start-column="8" selection-end-line="125" selection-end-column="24" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -598,12 +680,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py">
+    <entry file="file://$PROJECT_DIR$/waapi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="342" column="87" lean-forward="false" selection-start-line="342" selection-start-column="66" selection-end-line="342" selection-end-column="87" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanks_sample.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="34" selection-end-column="5" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="102" column="51" lean-forward="false" selection-start-line="102" selection-start-column="43" selection-end-line="102" selection-end-column="51" />
+          <folding>
+            <element signature="e#1#15#0" expanded="true" />
           </folding>
         </state>
       </provider>

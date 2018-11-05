@@ -45,25 +45,6 @@ class MyComponent(AkComponent):
         def saveWwiseProject():
             self.call(WAAPI_URI.ak_wwise_core_project_save)
 
-        def getQuerySearchCriteria(id):
-            #print("Get a list of the audio files currently in the project, under the selected object")
-            arguments = {
-                "from": {"id": [id]},
-                "transform": [
-                    {"select": ["children"]},
-                    {"where": ["type:isIn", ["SearchCriteria"]]}
-                ],
-                "options": {
-                    "return": ["id","type", "name", "path"]
-                }
-            }
-            try:
-                res = yield from(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
-            except Exception as ex:
-                print("call error: {}".format(ex))
-            else:
-                MyComponent.SoundbankQuerySearchCriteria = res.kwresults["return"][0]
-
         def getActorMixersInProject():
             #print("Get a list of the audio files currently in the project, under the selected object")
             arguments = {
@@ -83,56 +64,6 @@ class MyComponent(AkComponent):
             else:
                 MyComponent.ActorMixersInProject = res.kwresults["return"]
 
-        def SetQuerySearchProperty(object, searchValue):
-            arguments = {
-                "object": object,
-                "property":'ObjectReferenced',
-                "value": searchValue
-            }
-            try:
-                yield from(self.call(WAAPI_URI.ak_wwise_core_object_setproperty, **arguments))
-            except Exception as ex:
-                print("call error: {}".format(ex))
-            else:
-                print ("value set")
-
-
-        def GetSoundbankQuery():
-            print("Getting query from wwise")
-
-            arguments = {
-                "from": {"ofType": ["Query"]},
-                "transform": [
-                    {"where": ["name:matches", "SoundbankReferencing"]}
-                        ],
-                "options": {
-                    "return": ["id", "name","path"]
-                }
-            }
-            try:
-                res = yield from(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
-            except Exception as ex:
-                print("call error: {}".format(ex))
-            else:
-                MyComponent.SoundbankQuery= res.kwresults["return"][0]
-
-        def RunSoundbankQuery(query):
-            print("Running Query")
-
-            arguments = {
-                "from": {"query": [query]},
-                "options": {
-                    "return": ["id", "name", "type","path"]
-                }
-            }
-            try:
-                res = yield from(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
-            except Exception as ex:
-                print("call error: {}".format(ex))
-            else:
-                queryResults = res.kwresults["return"]
-                for i in queryResults:
-                    MyComponent.BanksToGenerate.append(i)
 
         def SearchForBankRefsAndUpdateLists(actorMixerList):
             print("hello")
@@ -140,32 +71,58 @@ class MyComponent(AkComponent):
             for ActorMixer in actorMixerList:
                 id = str(ActorMixer['id'])
                 workunit = ActorMixer['workunit']['name']
-                yield SetQuerySearchProperty(str(MyComponent.SoundbankQuerySearchCriteria['id']), id)
 
 
-
-                ## use object get with the query for X in changes
-                yield RunSoundbankQuery(MyComponent.SoundbankQuery['id'])
-
-        def GetSoundbanksFromPath():
+        def GetSoundbanksFromActorMixerWorkUnit(workunit):
             print("Getting query from wwise")
 
+            # Return all Soundbanks referencing any object of the Default Work Unit directly
             arguments = {
-                "from": {"path": ["\\Soundbanks"]},
-                "transform": [
-                    {"select": ["descendants"]},
-                    {"where": ["type:isIn", ["SoundBank"]]}
-                        ],
-                "options": {
-                    "return": ["id", "name","path"]
-                }
+                 "from": {"path": ['\\Actor-Mixer Hierarchy\\'+workunit]},
+                    "transform": [
+                     {"select": ['descendants']},
+                     {"select": ['referencesTo']},
+                    {"where": ['type:isIn', ['Action']]},
+                     "distinct",
+                    {"select": ['ancestors']},
+                    {"select": ['referencesTo']},
+                    {"where": ['type:isIn', ['SoundBank']]},
+                    "distinct",
+                    ]
+            }
+            options = {
+                "return": ['id', 'name', 'type']
             }
             try:
-                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments,options=options)
             except Exception as ex:
                 print("call error: {}".format(ex))
             else:
                 print (res.kwresults["return"])
+
+        def GetSoundbanksFromEventWorkUnit(workunit):
+            print("Getting query from wwise")
+
+            # Return all Soundbanks referencing any object of the Default Work Unit directly
+            arguments = {
+                 "from": {"path": ['\\Events\\'+workunit]},
+                    "transform": [
+                    {"select": ['descendants']},
+                    {"select": ['referencesTo']},
+                    {"where": ['type:isIn', ['SoundBank']]},
+                    "distinct",
+                    ]
+            }
+            options = {
+                "return": ['id', 'name', 'type']
+            }
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments,options=options)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+            else:
+                print (res.kwresults["return"])
+
 
 
         ###### Main logic flow #########
@@ -181,20 +138,15 @@ class MyComponent(AkComponent):
 
         #####  Do Some Cool stuff here #######
 
+        # Get the actor mixers from project
+        #yield getActorMixersInProject()
 
-        ## Get the soundbank query ID from project
- #       yield GetSoundbankQuery()
+        testPath = '\\Actor-Mixer Hierarchy\\VO'
 
-        ## Set the query property  Property Name="ObjectReferenced" to GUID
-#        yield getQuerySearchCriteria(MyComponent.SoundbankQuery['id'])
+        yield from GetSoundbanksFromActorMixerWorkUnit('VO')
 
-        yield from GetSoundbanksFromPath()
+        yield from GetSoundbanksFromEventWorkUnit('VO')
 
-        #Get the actor mixers from project
- #       yield getActorMixersInProject()
-
-        #Loop through actor mixer list, setting query and running, append bank list
-#        yield SearchForBankRefsAndUpdateLists(MyComponent.ActorMixersInProject)
 
 
         exit()
