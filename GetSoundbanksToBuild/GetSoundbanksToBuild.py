@@ -1,6 +1,8 @@
 
 import asyncio
 
+import os.path
+
 
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
 from ak_autobahn import AkComponent
@@ -11,20 +13,69 @@ from waapi import WAAPI_URI
 
 class MyComponent(AkComponent):
 
+    INPUT_filelist = []
+    INPUT_SelectedObj = None
 
+    ActorMixerWUs = []
+    EventWUs = []
+    sourceWavs = []
     ## List of banks with changes that need generating ##
     BanksToGenerate = []
 
-    SoundbankQuery = {}
-    SoundbankQuerySearchCriteria = {}
+    myTransforms = [
 
-    SearchValue = ""
+    [
+        {"select": ['referencesTo']},
+        {"where": ['type:isIn', ['SoundBank']]},
+        "distinct",
+    ],
 
-    ActorMixersInProject = {}
+    [
+        {"select": ['descendants']},
+        {"select": ['referencesTo']},
+        {"where": ['type:isIn', ['SoundBank']]},
+        "distinct",
+    ],
 
-    WorkUnitsToBanksMap = {}
+    [
+        {"select": ['ancestors']},
+        {"select": ['referencesTo']},
+        {"where": ['type:isIn', ['SoundBank']]},
+        "distinct",
+    ],
 
+    [
+        {"select": ['referencesTo']},
+        {"where": ['type:isIn', ['Action']]},
+        "distinct",
+        {"select": ['ancestors']},
+        {"select": ['referencesTo']},
+        {"where": ['type:isIn', ['SoundBank']]},
+        "distinct",
+    ],
 
+    [
+        {"select": ['descendants']},
+        {"select": ['referencesTo']},
+        {"where": ['type:isIn', ['Action']]},
+        "distinct",
+        {"select": ['ancestors']},
+        {"select": ['referencesTo']},
+        {"where": ['type:isIn', ['SoundBank']]},
+        "distinct",
+    ],
+
+    [
+        {"select": ['ancestors']},
+        {"select": ['referencesTo']},
+        {"where": ['type:isIn', ['Action']]},
+        "distinct",
+        {"select": ['ancestors']},
+        {"select": ['referencesTo']},
+        {"where": ['type:isIn', ['SoundBank']]},
+        "distinct",
+    ],
+    ]
 
     def onJoin(self, details):
         ###### Function definitions #########
@@ -45,84 +96,47 @@ class MyComponent(AkComponent):
         def saveWwiseProject():
             self.call(WAAPI_URI.ak_wwise_core_project_save)
 
-        def getActorMixersInProject():
-            #print("Get a list of the audio files currently in the project, under the selected object")
+        def onSelectionChanged(objects):
+            MyComponent.BanksToGenerate.clear()
+            print("Selection changed")
+            for object in objects:
+                for transform in MyComponent.myTransforms:
+                    yield from GetSoundbanks('id',object['id'],transform)
+            print(MyComponent.BanksToGenerate)
+
+
+
+        def SortInputFiles(inputfilelist):
+            for file in inputfilelist:
+                if os.path.splitext(file)[1][1:] == "wav":
+                    MyComponent.sourceWavs.append(file)
+                else:
+                    if os.path.splitext(file)[1][1:] == "wwu":
+                        if "Actor-Mixer Hierarchy" in os.path.abspath(file):
+                            MyComponent.ActorMixerWUs.append(file)
+                        if "Events" in os.path.abspath(file):
+                            MyComponent.EventWUs.append(file)
+
+
+
+        def GetSoundbanks(fromType,fromValue,transform):
+            # Return all Soundbanks referencing any object of the Work Unit directly
             arguments = {
-                "from": {"path": ["\\Actor-Mixer Hierarchy"]},
-                "transform": [
-                    {"select": ["descendants"]},
-                    {"where": ["type:isIn", ["ActorMixer"]]}
-                ],
-                "options": {
-                    "return": ["id", "name", "workunit"]
-                }
-            }
-            try:
-                res = yield from(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
-            except Exception as ex:
-                print("call error: {}".format(ex))
-            else:
-                MyComponent.ActorMixersInProject = res.kwresults["return"]
-
-
-        def SearchForBankRefsAndUpdateLists(actorMixerList):
-            print("hello")
-
-            for ActorMixer in actorMixerList:
-                id = str(ActorMixer['id'])
-                workunit = ActorMixer['workunit']['name']
-
-
-        def GetSoundbanksFromActorMixerWorkUnit(workunit):
-            print("Getting query from wwise")
-
-            # Return all Soundbanks referencing any object of the Default Work Unit directly
-            arguments = {
-                 "from": {"path": ['\\Actor-Mixer Hierarchy\\'+workunit]},
-                    "transform": [
-                     {"select": ['descendants']},
-                     {"select": ['referencesTo']},
-                    {"where": ['type:isIn', ['Action']]},
-                     "distinct",
-                    {"select": ['ancestors']},
-                    {"select": ['referencesTo']},
-                    {"where": ['type:isIn', ['SoundBank']]},
-                    "distinct",
-                    ]
+                "from": {fromType: [fromValue]},
+                "transform": transform,
             }
             options = {
                 "return": ['id', 'name', 'type']
             }
             try:
-                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments,options=options)
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments, options=options)
             except Exception as ex:
                 print("call error: {}".format(ex))
             else:
-                print (res.kwresults["return"])
-
-        def GetSoundbanksFromEventWorkUnit(workunit):
-            print("Getting query from wwise")
-
-            # Return all Soundbanks referencing any object of the Default Work Unit directly
-            arguments = {
-                 "from": {"path": ['\\Events\\'+workunit]},
-                    "transform": [
-                    {"select": ['descendants']},
-                    {"select": ['referencesTo']},
-                    {"where": ['type:isIn', ['SoundBank']]},
-                    "distinct",
-                    ]
-            }
-            options = {
-                "return": ['id', 'name', 'type']
-            }
-            try:
-                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments,options=options)
-            except Exception as ex:
-                print("call error: {}".format(ex))
-            else:
-                print (res.kwresults["return"])
-
+                # print (res.kwresults["return"])
+                for bank in res.kwresults["return"]:
+                    if bank["name"] not in MyComponent.BanksToGenerate:
+                        MyComponent.BanksToGenerate.append((bank["name"]))
 
 
         ###### Main logic flow #########
@@ -135,21 +149,20 @@ class MyComponent(AkComponent):
             # Call was successful, displaying information from the payload.
             print("Hello {} {}".format(res.kwresults['displayName'], res.kwresults['version']['displayName']))
 
-
+        self.subscribe(onSelectionChanged,WAAPI_URI.ak_wwise_ui_selectionchanged)
         #####  Do Some Cool stuff here #######
 
-        # Get the actor mixers from project
-        #yield getActorMixersInProject()
 
-        testPath = '\\Actor-Mixer Hierarchy\\VO'
-
-        yield from GetSoundbanksFromActorMixerWorkUnit('VO')
-
-        yield from GetSoundbanksFromEventWorkUnit('VO')
+        SortInputFiles(MyComponent.INPUT_filelist)
 
 
 
-        exit()
+        #yield from GetSoundbanks("path",'\\Actor-Mixer Hierarchy\\Cinematics',MyComponent.myTransforms[0])
+
+
+
+        #print (MyComponent.BanksToGenerate)
+        #exit()
 
 
     def onDisconnect(self):
