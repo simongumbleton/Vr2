@@ -28,9 +28,11 @@ class MyComponent(AkComponent):
 
     INPUT_SectionName = "DesertMission"      #the section name, from BAT file. Use to find actor mixer and events parent for importing
 
-    ImportLanguage = "French" #Default language for Wwise projects, Or SFX
+    DefaultLanguage = "English(UK)"
 
-    pathToOriginalsFromProjectRoot = ["Originals","Voices",ImportLanguage] # Where are the English VO files
+    ImportLanguages = ["French"] #Default language for Wwise projects, Or SFX
+
+    pathToOriginalsFromProjectRoot = ["Originals","Voices", DefaultLanguage] # Where are the English VO files
 
     stepsUpToCommonDirectory = 2    # How many folders up from the script is the shared dir with wwise project
 
@@ -102,7 +104,7 @@ class MyComponent(AkComponent):
                     {"select":["descendants"]},
                 ],
                 "options": {
-                    "return": ["type", "name", "path"]
+                    "return": ["type","id", "name", "path", "sound:originalWavFilePath"]
                 }
             }
             try:
@@ -115,13 +117,14 @@ class MyComponent(AkComponent):
 
         def createExistingAudioList(WwiseQueryResults):
             #print("creating a list of existing wwise sounds")
-            list = []
+            list = {}
             for i in WwiseQueryResults:
                 #print(i)
                 if i["type"] == "Sound":
                     #print(i)
                     soundName = str(i["name"])
-                    list.append(soundName)
+                    list[soundName] = i
+                    #list.append(soundName)
             MyComponent.ExistingWwiseAudio = list
 
         def setupAudioFilePath():
@@ -142,57 +145,22 @@ class MyComponent(AkComponent):
                 print("Er, the list of files to import is empty. This is usually because the path to the wwise project is incorrect. Check the depth to common directory argument..")
             MyComponent.ImportAudioFileList = filelist
 
-        def setupImportArgs(parentID, fileList,originalsPath):
+        def setupImportArgs(path,id, wavFile,language):
             #print ("Args for audio importing")
-            ParentID = str(parentID)
-            importFilelist = []
-            #for audiofile in fileList:
-            foo = fileList.rsplit('.') #remove extension from filename
-            audiofilename = foo[0]
-
-            ### Need an extra param in this function to set the originals location for the imported file. Needs to maintain the subfolders after the Main Path
-            str_InputFilePath = str(MyComponent.ImportAudioFilePath).replace('\\', '/')
-            str_AudioFileName = str(audiofilename).replace('\\','/')
-            originalsSubDir = str_AudioFileName.replace(str_InputFilePath,'')
-
-            # Just get the directory name from the audio file path
-            originalsSubDir = os.path.dirname(originalsSubDir)
-            if originalsSubDir == "/":
-                originalsSubDir = ""
-
-            baseDirName = os.path.basename(originalsSubDir)
-
-            eventPath = MyComponent.parentObjectPath.replace("Actor-Mixer Hierarchy", "Events")
-            #print(eventPath)
-
-            objectType = "<Sound Voice>"
-
-            # "\\Actor-Mixer Hierarchy\\Script Import\\<Actor-Mixer>Test 0\\<Sequence Container>Container 0\\<Sound SFX>My SFX 0"
-            if baseDirName:
-                objectPath = "<Actor-Mixer>"+baseDirName+"\\"
-            else:
-                objectPath = ""
-
-            sectionActorMixer = "<Actor-Mixer>"+MyComponent.INPUT_SectionName+"\\"
+            importFilelist=[]
 
             importFilelist.append(
                 {
-                    "audioFile": fileList,
-                    #"objectPath": "<Sound SFX>"+os.path.basename(audiofilename
-                    "objectPath": sectionActorMixer + objectPath + objectType + os.path.basename(audiofilename)
-                    #"objectPath": "<Sound Voice>" + os.path.basename(audiofilename)
+                    "audioFile": wavFile,
+                    "objectPath":path,#+"\\"+name,
+                    "objectType":"Sound"#"AudioFileSource"
                 }
             )
             MyComponent.importArgs = {
                 "importOperation": "useExisting",
                 "default": {
-                    "importLanguage": MyComponent.ImportLanguage,
-                    "importLocation": ParentID,
-                    "originalsSubFolder": originalsPath+originalsSubDir,
-                    "notes":"This object was auto imported",
-                    "@IsStreamingEnabled": MyComponent.OPTION_IsStreaming,
-                    "@IsZeroLantency": MyComponent.OPTION_IsStreaming,
-                    "event": eventPath+"\\"+os.path.basename(audiofilename)+"@Play"
+                    "importLanguage": language,
+                    "importLocation": id,
                     #,"ErrorTest":"Failme"
                     },
                 "imports": importFilelist
@@ -248,17 +216,24 @@ class MyComponent(AkComponent):
             if parID != None:
                 success = True
             if success:
+
                 yield from getExistingAudioInWwise(str(parID))
                 createExistingAudioList(MyComponent.WwiseQueryResults)
-                setupAudioFilePath()
+
                 count = 0
-                for file in MyComponent.ImportAudioFileList:
+                for file in MyComponent.ExistingWwiseAudio:
+                    path = MyComponent.ExistingWwiseAudio[file]["path"]
+                    id = MyComponent.ExistingWwiseAudio[file]["id"]
+                    name = MyComponent.ExistingWwiseAudio[file]["name"]
+                    originalWavpath = MyComponent.ExistingWwiseAudio[file]["sound:originalWavFilePath"].replace('\\', '/')
+                    originalWavpathSplit = "Originals"+originalWavpath.split("Originals",1)[1]
                     #print(file)
-                    f = file.rsplit('.')
-                    fname = os.path.basename(f[0])
-                    if not fname in MyComponent.ExistingWwiseAudio:
-                        yield setupImportArgs(parID, file, MyComponent.DefaultOriginalsPathForNewFiles)
-                        yield importAudioFiles(MyComponent.importArgs)
+                    for language in MyComponent.ImportLanguages:
+                        #(path, filename, fileList, language)
+                        languageWav = originalWavpathSplit.replace(MyComponent.DefaultLanguage,language)
+                        relPath = os.path.abspath(os.path.join(pathToWwiseProject,languageWav))
+                        setupImportArgs(path, id, str(relPath) ,language)
+                        yield from importAudioFiles(MyComponent.importArgs)
                         count += 1
                 MyComponent.ImportOperationSuccess = True
 
