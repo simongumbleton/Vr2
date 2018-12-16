@@ -12,7 +12,7 @@ import fnmatch
 from autobahn.asyncio.wamp import ApplicationRunner
 from ak_autobahn import AkComponent
 
-from waapi import WAAPI_URI
+from waapi_SG import WAAPI_URI
 
 
 

@@ -1,4 +1,4 @@
-from waapi import WaapiClient
+from waapi_SG import WaapiClient
 import pprint
 
 # Connect (default URL)
