@@ -30,7 +30,9 @@ class MyComponent(AkComponent):
 
     DefaultLanguage = "English(UK)"
 
-    ImportLanguages = ["French"] #Default language for Wwise projects, Or SFX
+    ImportLanguages = ["French","German"] #Default language for Wwise projects, Or SFX
+
+    Results = {}
 
     pathToOriginalsFromProjectRoot = ["Originals","Voices", DefaultLanguage] # Where are the English VO files
 
@@ -80,11 +82,13 @@ class MyComponent(AkComponent):
             self.leave()
 
         def setupBatchFileSysArgs():
-            print("Importing Audio files into.. "+sys.argv[1])  # Import section name
+            print("Importing localised files into.. "+sys.argv[1])  # Import section name
             MyComponent.INPUT_SectionName = str(sys.argv[1])
             StringInputOfDirOfWwiseProjectRoot = (sys.argv[2])
             MyComponent.DirOfWwiseProjectRoot = StringInputOfDirOfWwiseProjectRoot.split("/")
             MyComponent.stepsUpToCommonDirectory = int(sys.argv[3])
+            MyComponent.ImportLanguages = str(sys.argv[4]).split(",")
+            print("args setup")
 
 
 
@@ -102,6 +106,7 @@ class MyComponent(AkComponent):
                 "from": {"id": [object]},
                 "transform":[
                     {"select":["descendants"]},
+                    {"where": ['type:isIn', ['Sound']]},
                 ],
                 "options": {
                     "return": ["type","id", "name", "path", "sound:originalWavFilePath"]
@@ -167,14 +172,15 @@ class MyComponent(AkComponent):
                 }
 
         def importAudioFiles(args):
+            language = args['default']['importLanguage']
             try:
                 yield from self.call(WAAPI_URI.ak_wwise_core_audio_import, {}, **args)
             except Exception as ex:
-                print("call error: {}".format(ex))
-                MyComponent.ImportOperationSuccess = False
-                cancelUndoGroup()
+                #print("call error: {}".format(ex))
+                fileError = os.path.basename(args['imports'][0]['audioFile'])
+                MyComponent.Results[language]["fails"].append(fileError)
             else:
-                MyComponent.ImportOperationSuccess = True
+                MyComponent.Results[language]["imports"] += 1
 
         def SetupImportParentObject(objectName):
             # Setting up the import parent object
@@ -220,6 +226,10 @@ class MyComponent(AkComponent):
                 yield from getExistingAudioInWwise(str(parID))
                 createExistingAudioList(MyComponent.WwiseQueryResults)
 
+                for language in MyComponent.ImportLanguages:
+                    MyComponent.Results[language] = {"fails": [], "imports": 0}
+
+
                 count = 0
                 for file in MyComponent.ExistingWwiseAudio:
                     path = MyComponent.ExistingWwiseAudio[file]["path"]
@@ -245,7 +255,14 @@ class MyComponent(AkComponent):
             if (MyComponent.ImportOperationSuccess):
                 saveWwiseProject()
                 endUndoGroup()
-                print("Import operation success. "+str(count)+" new files imported.")
+                print("Import operation success.......Results......")#+str(count)+" new files imported.")
+                for lang in MyComponent.Results:
+                    print("_____"+lang+"______")
+                    print("Successful Imports = "+str(MyComponent.Results[lang]["imports"]))
+                    if len(MyComponent.Results[lang]["fails"]) > 0:
+                        print("Fails = ")
+                        for fail in MyComponent.Results[lang]["fails"]:
+                            print(str(fail))
             else:
                 print("Import operation failed! Check log for errors!")
                 endUndoGroup()
@@ -264,7 +281,7 @@ class MyComponent(AkComponent):
 
         #### If the sys args are longer than the default 1 (script name)
         if (len(sys.argv) > 1):
-            if(len(sys.argv)) >= 4:
+            if(len(sys.argv)) >= 5:
                 setupBatchFileSysArgs()
             else:
                 print("ERROR! Not enough arguments")
@@ -288,6 +305,8 @@ class MyComponent(AkComponent):
             return
 
         beginUndoGroup()
+
+        print("...working...")
 
         ## Get the Section work unit object and store ID and path
         yield from SetupImportParentObject(MyComponent.INPUT_SectionName)
