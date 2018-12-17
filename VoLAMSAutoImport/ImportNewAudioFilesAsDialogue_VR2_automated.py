@@ -195,7 +195,8 @@ class MyComponent(AkComponent):
                     "event": eventPath+"\\"+os.path.basename(audiofilename)+"@Play"
                     #,"ErrorTest":"Failme"
                     },
-                "imports": importFilelist
+                "imports": importFilelist,
+                #"autoAddToSourceControl": True  #not yet supported
                 }
 
         def importAudioFiles(args):

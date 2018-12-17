@@ -168,7 +168,8 @@ class MyComponent(AkComponent):
                     "importLocation": id,
                     #,"ErrorTest":"Failme"
                     },
-                "imports": importFilelist
+                "imports": importFilelist,
+                #"autoAddToSourceControl": True #Not yet supported in 2017.2.3
                 }
 
         def importAudioFiles(args):

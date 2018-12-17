@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import sys
 sys.path.append('..')
@@ -29,9 +30,11 @@ class MyComponent(AkComponent):
 
     INPUT_SectionName = "DesertMission"      #the section name, from BAT file. Use to find actor mixer and events parent for importing
 
+    WwiseParentObject = ""
+
     DefaultLanguage = "English(UK)"
 
-    ImportLanguages = ["French","German"] #Default language for Wwise projects, Or SFX
+    ImportLanguages = ["French","German","Japanese"] #Default language for Wwise projects, Or SFX
 
     Results = {}
 
@@ -101,6 +104,14 @@ class MyComponent(AkComponent):
             return path
 
 ###### MyComponent Importer Function Definitions #######
+        def getSelectedWwiseObject():
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_ui_getselectedobjects)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+            else:
+                MyComponent.WwiseParentObject = res.kwresults["objects"][0]
+
         def getExistingAudioInWwise(object):
             #print("Get a list of the audio files currently in the project, under the selected object")
             arguments = {
@@ -133,11 +144,6 @@ class MyComponent(AkComponent):
                     #list.append(soundName)
             MyComponent.ExistingWwiseAudio = list
 
-        def setupAudioFilePath():
-            #print("Setting up audio file path")
-            pathToFiles = os.path.expanduser(MyComponent.ImportAudioFilePath)
-            setupAudioFileList(pathToFiles)
-
         def setupAudioFileList(path):
             #print("Setting up list of audio files")
             filelist = []
@@ -169,7 +175,8 @@ class MyComponent(AkComponent):
                     "importLocation": id,
                     #,"ErrorTest":"Failme"
                     },
-                "imports": importFilelist
+                "imports": importFilelist,
+                #"autoAddToSourceControl":False  #not yet supported
                 }
 
         def importAudioFiles(args):
@@ -185,6 +192,7 @@ class MyComponent(AkComponent):
 
         def SetupImportParentObject(objectName):
             # Setting up the import parent object
+            print("Importing into " +objectName)
             arguments = {
                 "from": {"path": ["\Actor-Mixer Hierarchy"]},
                 "transform": [
@@ -256,8 +264,10 @@ class MyComponent(AkComponent):
             if (MyComponent.ImportOperationSuccess):
                 saveWwiseProject()
                 endUndoGroup()
+                print("")
                 print("Import operation success.......Results......")#+str(count)+" new files imported.")
                 for lang in MyComponent.Results:
+                    print("")
                     print("_____"+lang+"______")
                     print("Successful Imports = "+str(MyComponent.Results[lang]["imports"]))
                     if len(MyComponent.Results[lang]["fails"]) > 0:
@@ -277,6 +287,7 @@ class MyComponent(AkComponent):
         else:
             # Call was successful, displaying information from the payload.
             print("Hello {} {}".format(res.kwresults['displayName'], res.kwresults['version']['displayName']))
+            print("")
 
         absPathToScript = ""
 
@@ -287,9 +298,9 @@ class MyComponent(AkComponent):
             else:
                 print("ERROR! Not enough arguments")
 
-        print("Arguments passed in..."+str(sys.argv))
+        #print("Arguments passed in..."+str(sys.argv))
         currentWorkingDir = os.getcwd()
-        print("Current Working Directory = " + currentWorkingDir)
+        #print("Current Working Directory = " + currentWorkingDir)
 
         #### Construct the import audio file path. Use Section name from args
         ## Go up from the script to the dir shared with the Wwise project
@@ -307,10 +318,15 @@ class MyComponent(AkComponent):
 
         beginUndoGroup()
 
-        print("...working...")
+
+
+        yield from getSelectedWwiseObject()
 
         ## Get the Section work unit object and store ID and path
-        yield from SetupImportParentObject(MyComponent.INPUT_SectionName)
+        yield from SetupImportParentObject(MyComponent.WwiseParentObject['name'])
+
+        print("")
+        print("...working...")
 
         ## Main import function - Takes the ID of an object, to import files under.
         ## This method calls several other methods as it executes
