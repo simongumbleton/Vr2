@@ -91,7 +91,7 @@ class MyComponent(AkComponent):
             StringInputOfDirOfWwiseProjectRoot = (sys.argv[2])
             MyComponent.DirOfWwiseProjectRoot = StringInputOfDirOfWwiseProjectRoot.split("/")
             MyComponent.stepsUpToCommonDirectory = int(sys.argv[3])
-            MyComponent.ImportLanguages = str(sys.argv[4]).split(",")
+            #MyComponent.ImportLanguages = str(sys.argv[4]).split(",")
             print("args setup")
 
 
@@ -111,6 +111,40 @@ class MyComponent(AkComponent):
                 print("call error: {}".format(ex))
             else:
                 MyComponent.WwiseParentObject = res.kwresults["objects"][0]
+
+        def getLanguages():
+            arguments = {
+                "from": {"ofType": ["Language"]},
+                "options": {
+                    "return": ["name"]
+                }
+            }
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+                cancelUndoGroup()
+            else:
+                MyComponent.ImportLanguages.clear()
+                for lang in res.kwresults["return"]:
+                    if lang['name'] != 'SFX' and lang['name'] != 'External' and lang['name'] != 'Mixed':
+                        MyComponent.ImportLanguages.append(lang['name'])
+
+            arguments = {
+                "from": {"ofType": ["Project"]},
+                "options": {
+                    "return": ["@DefaultLanguage"]
+                }
+            }
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+                cancelUndoGroup()
+            else:
+                MyComponent.DefaultLanguage = res.kwresults["return"][0]['@DefaultLanguage']
+                MyComponent.ImportLanguages.remove(MyComponent.DefaultLanguage)
+            #print("Got languages")
 
         def getExistingAudioInWwise(object):
             #print("Get a list of the audio files currently in the project, under the selected object")
@@ -282,7 +316,7 @@ class MyComponent(AkComponent):
                     print("_____"+lang+"______")
                     print("Successful Imports = "+str(MyComponent.Results[lang]["imports"]))
                     if len(MyComponent.Results[lang]["fails"]) > 0:
-                        print("Fails = ")
+                        print("Fails = "+str(len(MyComponent.Results[lang]["fails"])))
                         for fail in MyComponent.Results[lang]["fails"]:
                             print(str(fail))
             else:
@@ -329,7 +363,7 @@ class MyComponent(AkComponent):
 
         beginUndoGroup()
 
-
+        yield from getLanguages()
 
         yield from getSelectedWwiseObject()
 

@@ -87,7 +87,7 @@ class MyComponent(AkComponent):
             StringInputOfDirOfWwiseProjectRoot = (sys.argv[2])
             MyComponent.DirOfWwiseProjectRoot = StringInputOfDirOfWwiseProjectRoot.split("/")
             MyComponent.stepsUpToCommonDirectory = int(sys.argv[3])
-            MyComponent.ImportLanguages = str(sys.argv[4]).split(",")
+            #MyComponent.ImportLanguages = str(sys.argv[4]).split(",")
             print("args setup")
 
 
@@ -120,6 +120,40 @@ class MyComponent(AkComponent):
             else:
                 MyComponent.WwiseQueryResults = res.kwresults["return"]
 
+        def getLanguages():
+            arguments = {
+                "from": {"ofType": ["Language"]},
+                "options": {
+                    "return": ["name"]
+                }
+            }
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+                cancelUndoGroup()
+            else:
+                MyComponent.ImportLanguages.clear()
+                for lang in res.kwresults["return"]:
+                    if lang['name'] != 'SFX' and lang['name'] != 'External' and lang['name'] != 'Mixed':
+                        MyComponent.ImportLanguages.append(lang['name'])
+
+            arguments = {
+                "from": {"ofType": ["Project"]},
+                "options": {
+                    "return": ["@DefaultLanguage"]
+                }
+            }
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+                cancelUndoGroup()
+            else:
+                MyComponent.DefaultLanguage = res.kwresults["return"][0]['@DefaultLanguage']
+                MyComponent.ImportLanguages.remove(MyComponent.DefaultLanguage)
+            #print("Got languages")
+
         def createExistingAudioList(WwiseQueryResults):
             #print("creating a list of existing wwise sounds")
             list = {}
@@ -129,8 +163,9 @@ class MyComponent(AkComponent):
                     #print(i)
                     soundName = str(i["name"])
                     list[soundName] = i
+                    MyComponent.ExistingWwiseAudio.append(i)
                     #list.append(soundName)
-            MyComponent.ExistingWwiseAudio = list
+            #MyComponent.ExistingWwiseAudio = list
 
         def setupAudioFilePath():
             #print("Setting up audio file path")
@@ -235,10 +270,10 @@ class MyComponent(AkComponent):
 
                 count = 0
                 for file in MyComponent.ExistingWwiseAudio:
-                    path = MyComponent.ExistingWwiseAudio[file]["path"]
-                    id = MyComponent.ExistingWwiseAudio[file]["id"]
-                    name = MyComponent.ExistingWwiseAudio[file]["name"]
-                    originalWavpath = MyComponent.ExistingWwiseAudio[file]["sound:originalWavFilePath"].replace('\\', '/')
+                    path = file['path']#MyComponent.ExistingWwiseAudio[file]['path']
+                    id = file['id']#MyComponent.ExistingWwiseAudio[file]['id']
+                    name = file['name']#MyComponent.ExistingWwiseAudio[file]['name']
+                    originalWavpath = file['sound:originalWavFilePath'].replace('\\', '/')
                     originalWavpathSplit = "Originals"+originalWavpath.split("Originals",1)[1]
                     #print(file)
                     for language in MyComponent.ImportLanguages:
@@ -263,7 +298,7 @@ class MyComponent(AkComponent):
                     print("_____"+lang+"______")
                     print("Successful Imports = "+str(MyComponent.Results[lang]["imports"]))
                     if len(MyComponent.Results[lang]["fails"]) > 0:
-                        print("Fails = ")
+                        print("Fails = "+str(len(MyComponent.Results[lang]["fails"])))
                         for fail in MyComponent.Results[lang]["fails"]:
                             print(str(fail))
             else:
@@ -310,6 +345,8 @@ class MyComponent(AkComponent):
         beginUndoGroup()
 
         print("...working...")
+
+        yield from getLanguages()
 
         ## Get the Section work unit object and store ID and path
         yield from SetupImportParentObject(MyComponent.INPUT_SectionName)
