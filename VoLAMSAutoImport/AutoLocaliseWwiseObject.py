@@ -26,7 +26,7 @@ class MyComponent(AkComponent):
 #args for audio import
     ImportAudioFilePath = ""    #full path to root folder for files to import
 
-    INPUT_SectionName = "DesertMission"      #the section name, from BAT file. Use to find actor mixer and events parent for importing
+    INPUT_SectionName = "Actor-Mixer Hierarchy"      #the section name, from BAT file. Use to find actor mixer and events parent for importing
 
     DefaultLanguage = "English(UK)"
 
@@ -195,6 +195,8 @@ class MyComponent(AkComponent):
                     "return": ["id","type", "name", "path"]
                 }
             }
+            if objectName == 'Actor-Mixer Hierarchy':
+                arguments["transform"] = [{"where": ["name:matches", objectName]}]
             try:
                 res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
             except Exception as ex:
