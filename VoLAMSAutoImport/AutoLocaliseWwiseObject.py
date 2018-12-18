@@ -109,7 +109,7 @@ class MyComponent(AkComponent):
                     {"where": ['type:isIn', ['Sound']]},
                 ],
                 "options": {
-                    "return": ["type","id", "name", "path", "sound:originalWavFilePath"]
+                    "return": ["type","id", "name", "path", "sound:originalWavFilePath","@IsVoice"]
                 }
             }
             try:
@@ -125,7 +125,7 @@ class MyComponent(AkComponent):
             list = {}
             for i in WwiseQueryResults:
                 #print(i)
-                if i["type"] == "Sound":
+                if i["type"] == "Sound" and i["@IsVoice"] == True:
                     #print(i)
                     soundName = str(i["name"])
                     list[soundName] = i
