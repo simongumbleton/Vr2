@@ -121,7 +121,7 @@ class MyComponent(AkComponent):
                     {"where": ['type:isIn', ['Sound']]},
                 ],
                 "options": {
-                    "return": ["type","id", "name", "path", "sound:originalWavFilePath"]
+                    "return": ["type","id", "name", "path", "sound:originalWavFilePath","@IsVoice"]
                 }
             }
             try:
@@ -137,7 +137,7 @@ class MyComponent(AkComponent):
             list = {}
             for i in WwiseQueryResults:
                 #print(i)
-                if i["type"] == "Sound":
+                if i["type"] == "Sound" and i["@IsVoice"] == True:
                     #print(i)
                     soundName = str(i["name"])
                     list[soundName] = i
@@ -193,6 +193,7 @@ class MyComponent(AkComponent):
         def SetupImportParentObject(objectName):
             # Setting up the import parent object
             print("Importing into " +objectName)
+
             arguments = {
                 "from": {"path": ["\Actor-Mixer Hierarchy"]},
                 "transform": [
@@ -203,6 +204,10 @@ class MyComponent(AkComponent):
                     "return": ["id","type", "name", "path"]
                 }
             }
+
+            if objectName == 'Actor-Mixer Hierarchy':
+                arguments["transform"] = [{"where": ["name:matches", objectName]}]
+
             try:
                 res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
             except Exception as ex:
@@ -234,6 +239,12 @@ class MyComponent(AkComponent):
 
                 yield from getExistingAudioInWwise(str(parID))
                 createExistingAudioList(MyComponent.WwiseQueryResults)
+
+                if len(MyComponent.ExistingWwiseAudio)==0:
+                    print("List of Existing Wwise Voices is Empty...")
+                    print("Unable to localise into selected wwise object...")
+                    print("...Exiting...")
+                    return
 
                 for language in MyComponent.ImportLanguages:
                     MyComponent.Results[language] = {"fails": [], "imports": 0}
