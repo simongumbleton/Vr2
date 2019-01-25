@@ -8,7 +8,8 @@ import asyncio
 
 import fnmatch
 
-from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
+#from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
+from wamp import ApplicationSession, ApplicationRunner
 from ak_autobahn import AkComponent
 
 
@@ -24,6 +25,8 @@ class MyComponent(AkComponent):
 
 # When this script runs, it will look up in the folder tree for a common ancestor folder with the Wwise project.
 # It uses the stepsUpToCommonDirectory variable to walk up the tree.
+
+
 
 #args for audio import
     ImportAudioFilePath = ""    #full path to root folder for files to import
@@ -288,14 +291,17 @@ class MyComponent(AkComponent):
                     path = file['path']  # MyComponent.ExistingWwiseAudio[file]['path']
                     id = file['id']  # MyComponent.ExistingWwiseAudio[file]['id']
                     name = file['name']  # MyComponent.ExistingWwiseAudio[file]['name']
-                    originalWavpath = file["sound:originalWavFilePath"].replace('\\', '/').replace("Y:", "~")
-                    originalWavpath = os.path.abspath(os.path.expanduser(originalWavpath))
-                    for language in MyComponent.ImportLanguages:
-                        #(path, filename, fileList, language)
-                        languageWav = originalWavpath.replace(MyComponent.DefaultLanguage,language)
-                        setupImportArgs(path, id, str(languageWav) ,language)
-                        yield from importAudioFiles(MyComponent.importArgs)
-                    count += 1
+                    if "sound:originalWavFilePath" in file:
+                        originalWavpath = file["sound:originalWavFilePath"].replace('\\', '/').replace("Y:", "~")
+                        originalWavpath = os.path.normpath(os.path.expanduser(originalWavpath))
+                        for language in MyComponent.ImportLanguages:
+                         #(path, filename, fileList, language)
+                            languageWav = os.path.normpath(originalWavpath.replace(MyComponent.DefaultLanguage,language))
+                            setupImportArgs(path, id, str(languageWav) ,language)
+                            yield from importAudioFiles(MyComponent.importArgs)
+                        count += 1
+                    else:
+                        print("sound:originalWavFilePath NOT in file")
                     printProgress(count,len(MyComponent.ExistingWwiseAudio))
                 MyComponent.ImportOperationSuccess = True
             else:
@@ -370,6 +376,21 @@ class MyComponent(AkComponent):
 
 
 if __name__ == '__main__':
+
+    #
+    # transportOptions = {
+    #     "maxFramePayloadSize": 0,
+    #     "maxMessagePayloadSize": 0,
+    #     "autoFragmentSize": 0,
+    #     "failByDrop": False,
+    #     "openHandshakeTimeout": 0,
+    #     "closeHandshakeTimeout": 0,
+    #     "tcpNoDelay": True,
+    #     "autoPingInterval": 0,
+    #     "autoPingTimeout": 0,
+    #     "autoPingSize": 4,
+    # }
+
     runner = ApplicationRunner(url=u"ws://127.0.0.1:8095/waapi", realm=u"realm1")
     try:
         runner.run(MyComponent)
