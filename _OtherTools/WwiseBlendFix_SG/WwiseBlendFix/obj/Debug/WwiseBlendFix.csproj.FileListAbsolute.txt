@@ -1,0 +1,14 @@
+C:\Users\gbwardni\Desktop\WwiseBlendFix\WwiseBlendFix\bin\Debug\WwiseBlendFix.exe.config
+C:\Users\gbwardni\Desktop\WwiseBlendFix\WwiseBlendFix\bin\Debug\WwiseBlendFix.exe
+C:\Users\gbwardni\Desktop\WwiseBlendFix\WwiseBlendFix\bin\Debug\WwiseBlendFix.pdb
+C:\Users\gbwardni\Desktop\WwiseBlendFix\WwiseBlendFix\obj\Debug\WwiseBlendFix.csprojResolveAssemblyReference.cache
+C:\Users\gbwardni\Desktop\WwiseBlendFix\WwiseBlendFix\obj\Debug\WwiseBlendFix.csproj.CoreCompileInputs.cache
+C:\Users\gbwardni\Desktop\WwiseBlendFix\WwiseBlendFix\obj\Debug\WwiseBlendFix.exe
+C:\Users\gbwardni\Desktop\WwiseBlendFix\WwiseBlendFix\obj\Debug\WwiseBlendFix.pdb
+N:\Projects\CSG\Audio\Users\Simon\WwiseBlendFix_SG\WwiseBlendFix\bin\Debug\WwiseBlendFix.exe.config
+N:\Projects\CSG\Audio\Users\Simon\WwiseBlendFix_SG\WwiseBlendFix\bin\Debug\WwiseBlendFix.exe
+N:\Projects\CSG\Audio\Users\Simon\WwiseBlendFix_SG\WwiseBlendFix\bin\Debug\WwiseBlendFix.pdb
+N:\Projects\CSG\Audio\Users\Simon\WwiseBlendFix_SG\WwiseBlendFix\obj\Debug\WwiseBlendFix.csprojAssemblyReference.cache
+N:\Projects\CSG\Audio\Users\Simon\WwiseBlendFix_SG\WwiseBlendFix\obj\Debug\WwiseBlendFix.csproj.CoreCompileInputs.cache
+N:\Projects\CSG\Audio\Users\Simon\WwiseBlendFix_SG\WwiseBlendFix\obj\Debug\WwiseBlendFix.exe
+N:\Projects\CSG\Audio\Users\Simon\WwiseBlendFix_SG\WwiseBlendFix\obj\Debug\WwiseBlendFix.pdb
