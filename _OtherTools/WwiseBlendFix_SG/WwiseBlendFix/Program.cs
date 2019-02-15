@@ -39,9 +39,11 @@ namespace WwiseBlendFix
                     var doc = XDocument.Load(path);
 
                     bool changed = false;
+            
 
                     foreach (var blendContainer in doc.Descendants("BlendContainer").ToArray())
                     {
+                        bool convert = true;
                         var blendList = blendContainer.Elements("BlendTrackList").FirstOrDefault();
                         if (blendList != null)
                         {
@@ -49,14 +51,36 @@ namespace WwiseBlendFix
                             if (blendList.Elements("BlendTrack").Any())
                                 continue;
                         }
+                        // Ignore blend containers with no children - Breaks the switch grouping info
                         var blendchildren = blendContainer.Elements("ChildrenList").FirstOrDefault();
                         if(blendchildren == null)
                         {
                             continue;
                         }
 
-                        ConvertBlendContainer(blendContainer, groupId, switchId, workUnitId);
-                        changed = true;
+                        //If blend container is excluded - Dont convert it
+                        var blendProperties = blendContainer.Elements("PropertyList").FirstOrDefault();
+                        if (blendProperties != null)
+                        {
+                            foreach (var blendinclusion in blendProperties.Elements("Property"))
+                            {
+                                if(blendinclusion.Attributes("Inclusion") != null)
+                                {
+                                    if (blendinclusion.Value == "False")
+                                    {
+                                        convert = false;
+                                        break;
+                                    }
+                                }
+                            }
+
+                        }
+
+                        if (convert)
+                        {
+                            ConvertBlendContainer(blendContainer, groupId, switchId, workUnitId);
+                            changed = true;
+                        }
                     }
 
                     if (changed)
@@ -212,6 +236,27 @@ namespace WwiseBlendFix
                 var name = sound.Attribute("Name");
                 var id = sound.Attribute("ID");
 
+                //if child is not included, dont add it to the default switch grouping
+                bool isChildIncluded = true;
+
+                //If blend container is excluded - Dont group it
+                var blendProperties = sound.Elements("PropertyList").FirstOrDefault();
+                if (blendProperties != null)
+                {
+                    foreach (var blendinclusion in blendProperties.Elements("Property"))
+                    {
+                        if (blendinclusion.Attributes("Inclusion") != null)
+                        {
+                            if (blendinclusion.Value == "False")
+                            {
+                                isChildIncluded = false;
+                                break;
+                            }
+                        }
+                    }
+
+                }
+
                 if (name == null || id == null)
                     continue;
 
@@ -220,7 +265,22 @@ namespace WwiseBlendFix
                 // Found a sound reference 
                 // Creaate a switch grouping
                 groupingBehaviorList.Add(new XElement("GroupingBehavior", new XElement(itemRef)));
-                groupingItemList.Add(new XElement(itemRef));
+                if (isChildIncluded)
+                {
+                    groupingItemList.Add(new XElement(itemRef));
+                }
+                
+            }
+            if (groupingItemList.IsEmpty == true)
+            {
+                var gpinfo = blendContainer.Element("GroupingInfo");
+                var gpLst = gpinfo.Element("GroupingList");
+                var grp = gpLst.Element("Grouping");
+                var itemList = grp.Element("ItemList");
+                itemList.Remove();
+                grp.Remove();
+                gpLst.Remove();
+
             }
         }
 
