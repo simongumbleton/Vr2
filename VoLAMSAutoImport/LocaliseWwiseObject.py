@@ -58,6 +58,8 @@ class MyComponent(AkComponent):
 
     OPTION_IsStreaming = True
 
+    isError = False
+
     DefaultOriginalsPathForNewFiles = "WAAPI/TestImports"  ##TODO Variable this based on import language/SFX
 
 #store a ref to the selected parent object
@@ -244,7 +246,7 @@ class MyComponent(AkComponent):
                 "from": {"path": ["\Actor-Mixer Hierarchy"]},
                 "transform": [
                     {"select":['descendants']},
-                    {"where": ["name:matches", objectName]}
+                    {"where": ["name:matches", "^"+objectName+"$"]}
                 ],
                 "options": {
                     "return": ["id","type", "name", "path","filePath"]
@@ -261,11 +263,18 @@ class MyComponent(AkComponent):
                 ID = ""
                 obj = ""
                 path = ""
+                matches = 0
                 for x in res.kwresults["return"]:
-                    if x["type"] == "WorkUnit":
+                    if x["type"] == "WorkUnit" and x["name"] == objectName:
+                        matches += 1
                         ID = str(x["id"])
                         obj = x
                         path = str(x["path"])
+
+                if matches > 1:
+                    print("ERROR....More than 1 match found for import parent. Exiting....")
+                    MyComponent.isError = True
+                    return
                 MyComponent.parentObject = obj
                 MyComponent.parentObjectPath = path
                 MyComponent.parentID = ID
@@ -321,6 +330,7 @@ class MyComponent(AkComponent):
                         print("Fails = "+str(len(MyComponent.Results[lang]["fails"])))
                         for fail in MyComponent.Results[lang]["fails"]:
                             print(str(fail))
+                print("")
             else:
                 print("Import operation failed! Check log for errors!")
                 endUndoGroup()
@@ -358,14 +368,17 @@ class MyComponent(AkComponent):
             ## Get the Section work unit object and store ID and path
             yield from SetupImportParentObject(MyComponent.INPUT_SectionName)
 
-        print("")
-        print("...working...")
+        if MyComponent.isError:
+            exit()
+        else:
+            print("")
+            print("...working...")
 
         ## Main import function - Takes the ID of an object, to import files under.
         ## This method calls several other methods as it executes
-        yield from ImportIntoWwiseUnderParentObject(MyComponent.parentID)
+            yield from ImportIntoWwiseUnderParentObject(MyComponent.parentID)
 
-        exit()
+            exit()
 
 
 
