@@ -242,18 +242,27 @@ class MyComponent(AkComponent):
 
         def SetupImportParentObject(objectName):
             # Setting up the import parent object
-            arguments = {
-                "from": {"path": ["\Actor-Mixer Hierarchy"]},
-                "transform": [
-                    {"select":['descendants']},
-                    {"where": ["name:matches", "^"+objectName+"$"]}
-                ],
-                "options": {
-                    "return": ["id","type", "name", "path","filePath"]
+            if MyComponent.LocaliseSelectedObject:
+                arguments = {
+                    "from": {"id": [objectName]},
+                    "options": {
+                        "return": ["id", "type", "name", "path", "filePath", "workunit:type"]
+                    }
                 }
-            }
-            if objectName == 'Actor-Mixer Hierarchy':
-                arguments["transform"] = [{"where": ["name:matches", objectName]}]
+            else:
+                arguments = {
+                    "from": {"path": ["\Actor-Mixer Hierarchy"]},
+                    "transform": [
+                        {"select": ['descendants']},
+                        {"where": ["name:matches", "^" + objectName + "$"]},
+                        {"where": ['type:isIn', ['WorkUnit']]}
+                    ],
+                    "options": {
+                        "return": ["id", "type", "name", "path", "filePath", "workunit:type"]
+                    }
+                }
+                if objectName == 'Actor-Mixer Hierarchy':
+                    arguments["transform"] = [{"where": ["name:matches", objectName]}]
             try:
                 res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
             except Exception as ex:
@@ -265,19 +274,18 @@ class MyComponent(AkComponent):
                 path = ""
                 matches = 0
                 for x in res.kwresults["return"]:
-                    if x["type"] == "WorkUnit" and x["name"] == objectName:
                         matches += 1
                         ID = str(x["id"])
                         obj = x
                         path = str(x["path"])
 
                 if matches > 1:
-                    print("ERROR....More than 1 match found for import parent. Exiting....")
-                    MyComponent.isError = True
-                    return
+                    print("WARNING....More than 1 match found for import parent. Check import results..")
+
                 MyComponent.parentObject = obj
                 MyComponent.parentObjectPath = path
                 MyComponent.parentID = ID
+                print("Localising audio underneath "+path)
 
         def ImportIntoWwiseUnderParentObject(parentObjectID):
             #print("Method to get the parent to create new object under")
@@ -363,7 +371,7 @@ class MyComponent(AkComponent):
         if MyComponent.LocaliseSelectedObject:
             yield from getSelectedWwiseObject()
             ## Get the Section work unit object and store ID and path
-            yield from SetupImportParentObject(MyComponent.WwiseParentObject['name'])
+            yield from SetupImportParentObject(MyComponent.WwiseParentObject['id'])
         else:
             ## Get the Section work unit object and store ID and path
             yield from SetupImportParentObject(MyComponent.INPUT_SectionName)
