@@ -1,19 +1,16 @@
 import os
 import sys
 
-import trollius as asyncio
-from trollius import From
+import asyncio
 
-import Tkinter
-import tkFileDialog
-
-from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
+from autobahn.asyncio.wamp import ApplicationRunner
 from ak_autobahn import AkComponent
 
+from waapi_SG import WAAPI_URI
 
-# You may also copy-paste the waapi.py file alongside this sample
-sys.path.append(os.path.join(os.path.dirname(__file__), '../../../../include/AK/WwiseAuthoringAPI/py'))
-from waapi import WAAPI_URI
+import tkinter
+from tkinter import filedialog
+
 
 class MyComponent(AkComponent):
 
@@ -73,7 +70,7 @@ class MyComponent(AkComponent):
 
     def onJoin(self, details):
         try:
-            res = yield From(self.call(WAAPI_URI.ak_wwise_core_getinfo))  # RPC call without arguments
+            res = yield from self.call(WAAPI_URI.ak_wwise_core_getinfo)  # RPC call without arguments
         except Exception as ex:
             print("call error: {}".format(ex))
         else:
@@ -84,7 +81,7 @@ class MyComponent(AkComponent):
 
 
         def askUserForImportDirectory():
-            MyComponent.INPUT_audioFilePath = tkFileDialog.askdirectory()
+            MyComponent.INPUT_audioFilePath = filedialog.askdirectory()
             print(MyComponent.INPUT_audioFilePath)
 
 
@@ -111,7 +108,7 @@ class MyComponent(AkComponent):
                 print("Method to get the parent to create new object under")
                 success = False
                 parID = None
-                yield getSelectedObject()
+                getSelectedObject()
                 print("Selected object is...")
 
                 if MyComponent.Results != None:
@@ -126,7 +123,7 @@ class MyComponent(AkComponent):
 
                 if success:
                     setupCreateArgs(parID, MyComponent.INPUT_ObjectType, MyComponent.INPUT_ObjectName) # include optional arguments for type/name/conflict
-                    yield createWwiseObject(MyComponent.createObjArgs)
+                    yield from createWwiseObject(MyComponent.createObjArgs)
                     print(MyComponent.Results)
                     MyComponent.objectCreated = True
                 else:
@@ -134,17 +131,17 @@ class MyComponent(AkComponent):
                     return
 
                 #import audio
-                yield setupAudioFilePath()
+                yield from setupAudioFilePath()
                 importParent = MyComponent.Results.kwresults['id']
-                yield setupImportArgs(importParent, MyComponent.INPUT_audioFileList,MyComponent.INPUT_originalsPath)
-                yield importAudioFiles(MyComponent.importArgs)
+                yield from setupImportArgs(importParent, MyComponent.INPUT_audioFileList,MyComponent.INPUT_originalsPath)
+                yield from importAudioFiles(MyComponent.importArgs)
 
                 #Setup an event to play the created object
                 if MyComponent.OPTION_CreateEvent:
                     evName = MyComponent.Results.kwresults["name"]
                     evTarget = str(MyComponent.Results.kwresults["id"])
                     setupEventArgs(evName, evTarget)
-                    yield createWwiseObject(MyComponent.createEventArgs)
+                    yield from createWwiseObject(MyComponent.createEventArgs)
                     print(MyComponent.Results)
                     MyComponent.eventCreated = True
 
@@ -153,7 +150,7 @@ class MyComponent(AkComponent):
                 self.leave()
 
         def saveWwiseProject():
-            self.call(WAAPI_URI.ak_wwise_core_project_save)
+            yield from self.call(WAAPI_URI.ak_wwise_core_project_save)
 
         def setupEventArgs(oname,otarget,oactionType = 1):
             print("setting up event")
@@ -254,7 +251,7 @@ class MyComponent(AkComponent):
 
         def getSelectedObject():
             try:
-                x = yield self.call(WAAPI_URI.ak_wwise_ui_getselectedobjects)
+                x = yield from self.call(WAAPI_URI.ak_wwise_ui_getselectedobjects)
             except Exception as ex:
                 print("call error: {}".format(ex))
             #print (x)
@@ -262,14 +259,14 @@ class MyComponent(AkComponent):
 
         def createWwiseObject(args):
             try:
-                res = yield self.call(WAAPI_URI.ak_wwise_core_object_create, {}, **args)
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_create, {}, **args)
             except Exception as ex:
                 print("call error: {}".format(ex))
             MyComponent.Results = res
 
         def importAudioFiles(args):
             try:
-                res = yield self.call(WAAPI_URI.ak_wwise_core_audio_import, {}, **args)
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_audio_import, {}, **args)
             except Exception as ex:
                 print("call error: {}".format(ex))
             #MyComponent.Results = res
@@ -287,7 +284,7 @@ class MyComponent(AkComponent):
                     }
                 }
                 try:
-                    res2 = yield From(self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments))
+                    res2 = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
                 except Exception as ex:
                     print("call error: {}".format(ex))
                 else:
@@ -325,7 +322,7 @@ class MyComponent(AkComponent):
 
 
 if __name__ == '__main__':
-    runner = ApplicationRunner(url=u"ws://127.0.0.1:8080/waapi", realm=u"realm1")
+    runner = ApplicationRunner(url=u"ws://127.0.0.1:8095/waapi", realm=u"realm1")
     try:
         runner.run(MyComponent)
     except Exception as e:
