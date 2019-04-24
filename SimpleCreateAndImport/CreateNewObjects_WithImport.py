@@ -6,6 +6,8 @@ import asyncio
 from autobahn.asyncio.wamp import ApplicationRunner
 from ak_autobahn import AkComponent
 
+import fnmatch
+
 from waapi_SG import WAAPI_URI
 
 import tkinter
@@ -34,9 +36,9 @@ class MyComponent(AkComponent):
 
 #Variables for object creation
     objParID = "None"
-    objType = "BlendContainer"
-    objName = "MyCreatedObject"
-    nameConflict = "rename"
+    objType = ""
+    objName = ""
+    nameConflict = "merge"
     objNotes = "This object was auto created...."
 
 #args dict for object creation For use with create object call
@@ -58,8 +60,8 @@ class MyComponent(AkComponent):
     importArgs = {}
 
 #Input variables. TO DO: Drive these from data e.g Reaper
-    INPUT_ObjectType = ""
-    INPUT_ObjectName = ""
+    INPUT_ObjectType = "BlendContainer"
+    INPUT_ObjectName = "MyCreatedObject"
     OPTION_CreateEvent = True
 
 
@@ -81,7 +83,12 @@ class MyComponent(AkComponent):
 
 
         def askUserForImportDirectory():
-            MyComponent.INPUT_audioFilePath = filedialog.askdirectory()
+            root = tkinter.Tk()
+            root.withdraw()
+            root.update()
+            MyComponent.INPUT_audioFilePath = filedialog.askdirectory(title="Choose source directory")
+            root.update()
+            root.destroy()
             print(MyComponent.INPUT_audioFilePath)
 
 
@@ -102,21 +109,21 @@ class MyComponent(AkComponent):
             MyComponent.objectCreated = False
             MyComponent.eventCreated = False
 
-        def onParentSelected():
+        def onSelectionChanged(objects):
+            print("Selection changed")
+
+        def onParentSelected(objects):
             # subscribe to selection change?
             if not MyComponent.parentSelected:
                 print("Method to get the parent to create new object under")
                 success = False
                 parID = None
-                getSelectedObject()
+                MyComponent.parentObject = objects[0]
+                #getSelectedObject()
                 print("Selected object is...")
 
-                if MyComponent.Results != None:
+                if MyComponent.parentObject != None:
                     success = True
-                    print(MyComponent.Results.kwresults['objects'])
-                    obj = MyComponent.Results.kwresults['objects']
-                    # print(obj[0]['id'])
-                    MyComponent.parentObject = obj[0]
                     print("Selected object name is...{}".format(MyComponent.parentObject[u"name"]))
                     parID = str(MyComponent.parentObject["id"])
                     MyComponent.parentSelected = True
@@ -131,9 +138,9 @@ class MyComponent(AkComponent):
                     return
 
                 #import audio
-                yield from setupAudioFilePath()
+                setupAudioFilePath()
                 importParent = MyComponent.Results.kwresults['id']
-                yield from setupImportArgs(importParent, MyComponent.INPUT_audioFileList,MyComponent.INPUT_originalsPath)
+                setupImportArgs(importParent, MyComponent.INPUT_audioFileList,MyComponent.INPUT_originalsPath)
                 yield from importAudioFiles(MyComponent.importArgs)
 
                 #Setup an event to play the created object
@@ -164,7 +171,7 @@ class MyComponent(AkComponent):
                 "parent": "\\Events\\Default Work Unit",
                 "type": "Folder",
                 "name": "WAAPI Auto Events",
-                "onNameConflict": "rename",
+                "onNameConflict": "merge",
                 "children": [
                     {
                         "type": "Event",
@@ -181,7 +188,7 @@ class MyComponent(AkComponent):
                 ]
             }
 
-        def setupCreateArgs(parentID ,otype = "BlendContainer", oname = "AutoCreatedObject", conflict = "rename"):
+        def setupCreateArgs(parentID ,otype = "BlendContainer", oname = "AutoCreatedObject", conflict = "merge"):
             #check the inputs
             if otype == "":
                 MyComponent.objType = "BlendContainer"
@@ -215,10 +222,13 @@ class MyComponent(AkComponent):
 
         def setupAudioFileList(path):
             print("Setting up list of audio files")
+
             filelist = []
-            for file in os.listdir(path):
-                if file.endswith(".wav"):
-                    absFilePath = os.path.abspath(os.path.join(path, file))
+            pattern = '*.wav'
+            for root, dirs, files in os.walk(path):
+                # for file in os.listdir(path):
+                for filename in fnmatch.filter(files, pattern):
+                    absFilePath = os.path.abspath(os.path.join(root, filename))
                     filelist.append(absFilePath)
 
             MyComponent.INPUT_audioFileList = filelist
@@ -289,12 +299,6 @@ class MyComponent(AkComponent):
                     print("call error: {}".format(ex))
                 else:
                     print(res2.kwresults)
-                    returnObjs = res2.kwresults[u"return"]
-                    for returnObj in returnObjs:
-                        #       print("\t{}".format(returnObj[u"type"]))
-                        print("Returned object name is...{}".format(returnObj[u"name"]))
-                        print("%s object type is...%s." % (returnObj[u"name"], returnObj[u"type"]))
-                        print("%s object path is...%s." % (returnObj[u"name"], returnObj["path"]))
 
         askUserForImportDirectory()
 
