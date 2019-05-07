@@ -398,19 +398,6 @@ class MyComponent(AkComponent):
 
 if __name__ == '__main__':
 
-    #
-    # transportOptions = {
-    #     "maxFramePayloadSize": 0,
-    #     "maxMessagePayloadSize": 0,
-    #     "autoFragmentSize": 0,
-    #     "failByDrop": False,
-    #     "openHandshakeTimeout": 0,
-    #     "closeHandshakeTimeout": 0,
-    #     "tcpNoDelay": True,
-    #     "autoPingInterval": 0,
-    #     "autoPingTimeout": 0,
-    #     "autoPingSize": 4,
-    # }
 
     runner = ApplicationRunner(url=u"ws://127.0.0.1:8095/waapi", realm=u"realm1")
     try:

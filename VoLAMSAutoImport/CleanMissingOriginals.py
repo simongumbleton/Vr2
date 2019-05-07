@@ -1,9 +1,8 @@
 import os
 import sys
 
-#import trollius as asyncio
 import asyncio
-#from trollius import From
+
 
 
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
@@ -55,6 +54,40 @@ class MyComponent(AkComponent):
             # Subscribe to ak.wwise.core.object.created
             # Calls on_object_created whenever the event is received
             self.subscribe(onParentSelected, WAAPI_URI.ak_wwise_ui_selectionchanged)
+
+        def getProject():
+            arguments = {
+                "from": {"ofType": ["Project"]},
+                "options": {
+                    "return": ["type","id", "name", "filePath"]
+                }
+            }
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+                cancelUndoGroup()
+            else:
+                MyComponent.WwiseProjectPath = res.kwresults["return"][0]['filePath']
+                MyComponent.WwiseProjectPath = MyComponent.WwiseProjectPath.replace("Y:","~").replace('\\', '/')
+                MyComponent.pathToWwiseProject = os.path.dirname(os.path.abspath(MyComponent.WwiseProjectPath))
+
+        def getDefaultLanguage():
+
+            arguments = {
+                "from": {"ofType": ["Project"]},
+                "options": {
+                    "return": ["@DefaultLanguage"]
+                }
+            }
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+                cancelUndoGroup()
+            else:
+                MyComponent.ImportLanguage = res.kwresults["return"][0]['@DefaultLanguage']
+
 
         def getSelectedObject():
             selectedObjectArgs = {
@@ -171,9 +204,9 @@ class MyComponent(AkComponent):
         def setupBatchFileSysArgs():
             print("Cleaning missing files from.. " + sys.argv[1])  # Import section name
             MyComponent.Input_ParentObjectName = str(sys.argv[1])
-            StringInputOfDirOfWwiseProjectRoot = (sys.argv[2])
-            MyComponent.DirOfWwiseProjectRoot = StringInputOfDirOfWwiseProjectRoot.split("/")
-            MyComponent.stepsUpToCommonDirectory = int(sys.argv[3])
+            #StringInputOfDirOfWwiseProjectRoot = (sys.argv[2])
+            #MyComponent.DirOfWwiseProjectRoot = StringInputOfDirOfWwiseProjectRoot.split("/")
+            #MyComponent.stepsUpToCommonDirectory = int(sys.argv[3])
 
         def walk_up_folder(path, depth):
             _cur_depth = 0
@@ -197,7 +230,7 @@ class MyComponent(AkComponent):
         #setupSubscriptions()
 
         if (len(sys.argv) > 1):
-            if(len(sys.argv)) >= 4:
+            if(len(sys.argv)) >= 2:
                 setupBatchFileSysArgs()
             else:
                 print("ERROR! Not enough arguments")
@@ -210,30 +243,33 @@ class MyComponent(AkComponent):
         currentWorkingDir = os.getcwd()
         print("Current Working Directory = " + currentWorkingDir)
 
+        yield from getProject()
+
+        yield from getDefaultLanguage()
+
         #### Construct the import audio file path. Use Section name from args
-        ## Go up from the script to the dir shared with the Wwise project
+
         ## Construct the path down to the Originals section folder containing the files to import
-        sharedDir = walk_up_folder(currentWorkingDir, MyComponent.stepsUpToCommonDirectory)
-        pathToWwiseProject = os.path.join(sharedDir, *MyComponent.DirOfWwiseProjectRoot)
-        pathToOriginalFiles = os.path.join(pathToWwiseProject, *MyComponent.pathToOriginalsFromProjectRoot)
+
+        pathToOriginalFiles = os.path.join(MyComponent.pathToWwiseProject, *MyComponent.pathToOriginalsFromProjectRoot)
         pathToSectionFiles = os.path.join(pathToOriginalFiles, MyComponent.Input_ParentObjectName)
         MyComponent.ImportAudioFilePath = os.path.abspath(pathToSectionFiles)
 
 
-        SetupImportParentObject(MyComponent.Input_ParentObjectName)
+        yield from SetupImportParentObject(MyComponent.Input_ParentObjectName)
 
         #yield getIDofParent(MyComponent.ActorMixerPath,MyComponent.Input_ParentObjectName)
-        getAudioFilesInWwise(MyComponent.parentID)
+        yield from getAudioFilesInWwise(MyComponent.parentID)
         createListOfBrokenAudio(MyComponent.WwiseQueryResults)
 
         for x in MyComponent.WwiseAudioMissingOriginals:
             name = str(x["name"])
-            getWwiseEventByName(name)
-            deleteWwiseObject(x["id"])
+            yield from getWwiseEventByName(name)
+            yield from deleteWwiseObject(x["id"])
 
         for x in MyComponent.WwiseEventsToDelete:
             id = str(x["id"])
-            deleteWwiseObject(id)
+            yield from deleteWwiseObject(id)
 
         numberOfFilesCleaned = len(MyComponent.WwiseAudioMissingOriginals)
         print(str(numberOfFilesCleaned) + " Files cleaned from " + MyComponent.Input_ParentObjectName)
