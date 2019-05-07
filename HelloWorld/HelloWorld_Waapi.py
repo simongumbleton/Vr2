@@ -6,40 +6,11 @@ from ak_autobahn import AkComponent
 
 from waapi_SG import WAAPI_URI
 
-MyTransports = [
-    {
-        # you can set various websocket options here if you want
-        u"options": {
-            u"open_handshake_timeout": 100,
-            u"maxFramePayloadSize": 0,
-            u"maxMessagePayloadSize": 0,
-            u"autoFragmentSize": 0,
-            u"openHandshakeTimeout": 0,
-            u"closeHandshakeTimeout": 0,
-            u"autoPingInterval": 0,
-            u"autoPingTimeout": 0
-        }
-    },
-]
+
 
 
 class MyComponent(AkComponent):
 
-    transports =[
-    {
-        # you can set various websocket options here if you want
-        u"options": {
-            u"open_handshake_timeout": 100,
-            u"maxFramePayloadSize": 0,
-            u"maxMessagePayloadSize": 0,
-            u"autoFragmentSize": 0,
-            u"openHandshakeTimeout": 0,
-            u"closeHandshakeTimeout": 0,
-            u"autoPingInterval": 0,
-            u"autoPingTimeout": 0
-            }
-        },
-    ]
 
     def onJoin(self, details):
 
