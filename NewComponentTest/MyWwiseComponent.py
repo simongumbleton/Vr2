@@ -8,6 +8,8 @@ myWaapiComponent = Component(
                      u"type": u"websocket",
                      u"url": u"ws://127.0.0.1:8095/waapi",
                      # you can set various websocket options here if you want
+                     u"serializers":[u'json'],
+                     u"max_retries":0,
                      u"options": {
                          u"open_handshake_timeout": 0,
                          u"auto_ping_timeout":0,

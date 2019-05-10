@@ -84,13 +84,14 @@ class MyComponent(AkComponent):
 
     ############### Exit  #############################
         saveWwiseProject()
-        exit()
+        #exit()
+        self.leave()
 
 
-    def onDisconnect(self):
-        print("The client was disconnected.")
-
-        asyncio.get_event_loop().stop()
+    # def onDisconnect(self):
+    #     print("The client was disconnected.")
+    #
+    #     asyncio.get_event_loop().stop()
 
 
 if __name__ == '__main__':
