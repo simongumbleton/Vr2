@@ -1,14 +1,14 @@
+import sys
+import os
 
 import asyncio
-
+from autobahn.asyncio.component import run
 import autobahn.asyncio.wamp
 
+sys.path.append('../')
 
 from ak_autobahn import AkComponent
 from MyWwiseComponent import myWaapiComponent
-
-from autobahn.asyncio.component import run
-
 from waapi import WAAPI_URI
 
 
@@ -84,14 +84,14 @@ class MyComponent(AkComponent):
 
     ############### Exit  #############################
         saveWwiseProject()
-        #exit()
-        self.leave()
+        exit()
+        #self.leave()
 
 
-    # def onDisconnect(self):
-    #     print("The client was disconnected.")
-    #
-    #     asyncio.get_event_loop().stop()
+    def onDisconnect(self):
+         print("The client was disconnected.")
+
+         asyncio.get_event_loop().stop()
 
 
 if __name__ == '__main__':
