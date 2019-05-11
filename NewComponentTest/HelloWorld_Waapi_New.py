@@ -5,7 +5,7 @@ import asyncio
 from autobahn.asyncio.component import run
 import autobahn.asyncio.wamp
 
-sys.path.append('../')
+sys.path.append('..')
 
 from ak_autobahn import AkComponent
 from MyWwiseComponent import myWaapiComponent

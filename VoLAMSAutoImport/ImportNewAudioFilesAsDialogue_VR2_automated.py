@@ -2,7 +2,7 @@ import os
 import sys
 
 import asyncio
-
+sys.path.append('..')
 
 import fnmatch
 

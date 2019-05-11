@@ -360,7 +360,7 @@ class MyComponent(AkComponent):
             setupBatchFileSysArgs()
         else:
             MyComponent.LocaliseSelectedObject = True
-            print("No arguments given, using currently selected object")
+            print("No arguments given, using currently selected object\n")
 
         beginUndoGroup()
 

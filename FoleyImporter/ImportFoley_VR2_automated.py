@@ -1,6 +1,8 @@
 import os
 import sys
 
+sys.path.append('..')
+
 import asyncio
 import tkinter
 from tkinter import filedialog

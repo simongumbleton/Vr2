@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append('..')
+
 from waapi_SG import WaapiClient
 import pprint
 

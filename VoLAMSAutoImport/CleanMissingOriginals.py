@@ -3,7 +3,7 @@ import sys
 
 import asyncio
 
-
+sys.path.append('..')
 
 from autobahn.asyncio.wamp import ApplicationSession, ApplicationRunner
 from ak_autobahn import AkComponent

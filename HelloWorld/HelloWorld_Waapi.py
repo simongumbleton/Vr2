@@ -1,5 +1,8 @@
-
+import sys
+import os
 import asyncio
+
+sys.path.append('..')
 
 from autobahn.asyncio.wamp import ApplicationRunner
 from ak_autobahn import AkComponent
