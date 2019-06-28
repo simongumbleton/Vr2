@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a9fbde4f-b412-43eb-9183-ca01beb9169c" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/NewComponentTest/HelloWorld_Waapi_New.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/NewComponentTest/MyWwiseComponent.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/NewComponentTest/ak_autobahn.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/NewComponentTest/waapi.py" />
-      <change beforePath="$PROJECT_DIR$/.idea/Vr2.iml" afterPath="$PROJECT_DIR$/.idea/Vr2.iml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/GenerateSoundbanks/Generatesoundbanks.py" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -19,34 +15,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HelloWorld_Waapi_New.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/NewComponentTest/HelloWorld_Waapi_New.py">
+      <file leaf-file-name="Generatesoundbanks.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GenerateSoundbanks/Generatesoundbanks.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="45" column="50" lean-forward="false" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
+            <state relative-caret-position="500">
+              <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
               <folding>
-                <element signature="e#1#15#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ak_autobahn.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NewComponentTest/ak_autobahn.py">
+      <file leaf-file-name="GetSoundbanksToBuild.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-439">
-              <caret line="8" column="69" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="69" />
-              <folding />
+            <state relative-caret-position="-2020">
+              <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyWwiseComponent.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NewComponentTest/MyWwiseComponent.py">
+      <file leaf-file-name="LocaliseWwiseObject.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/LocaliseWwiseObject.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="58" lean-forward="false" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
-              <folding />
+            <state relative-caret-position="126">
+              <caret line="124" column="8" lean-forward="false" selection-start-line="124" selection-start-column="8" selection-end-line="130" selection-end-column="75" />
+              <folding>
+                <element signature="e#23#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,29 +83,51 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/CopyMatchingFiles/CopyMatchingFiles.py" />
-        <option value="$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py" />
-        <option value="$PROJECT_DIR$/VoLAMSAutoImport/CleanMissingOriginals.py" />
         <option value="$PROJECT_DIR$/_waapiTemplateScript.py" />
-        <option value="$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py" />
-        <option value="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanks_sample.py" />
-        <option value="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py" />
-        <option value="$PROJECT_DIR$/VoLAMSAutoImport/ImportNewAudioFilesAsDialogue_VR2_automated.py" />
         <option value="$PROJECT_DIR$/VoLAMSAutoImport/AutoLocaliseWwiseObject.py" />
         <option value="$PROJECT_DIR$/wamp.py" />
         <option value="C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/site-packages/autobahn/asyncio/wamp.py" />
-        <option value="$PROJECT_DIR$/VoLAMSAutoImport/LocaliseWwiseObject.py" />
-        <option value="$PROJECT_DIR$/SimpleCreateAndImport/CreateNewObjects_WithImport.py" />
         <option value="$PROJECT_DIR$/HelloWorld/MyWwiseComponent.py" />
         <option value="$PROJECT_DIR$/NewComponentTest/MyWwiseComponent.py" />
+        <option value="$PROJECT_DIR$/VoLAMSAutoImport/LocaliseWwiseObject.py" />
+        <option value="$PROJECT_DIR$/SimpleCreateAndImport/CreateNewObjects_WithImport.py" />
+        <option value="$PROJECT_DIR$/VoLAMSAutoImport/CleanMissingOriginals.py" />
+        <option value="$PROJECT_DIR$/VoLAMSAutoImport/ImportNewAudioFilesAsDialogue_VR2_automated.py" />
+        <option value="$PROJECT_DIR$/HelloWorld/HelloWorld_Waapi.py" />
+        <option value="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py" />
+        <option value="$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanks_sample.py" />
+        <option value="$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py" />
+        <option value="$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py" />
+        <option value="$PROJECT_DIR$/NewComponentTest/BaseWwiseComponent.py" />
         <option value="$PROJECT_DIR$/NewComponentTest/HelloWorld_Waapi_New.py" />
+        <option value="$PROJECT_DIR$/GenerateSoundbanks/Generatesoundbanks.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="201" />
-    <option name="y" value="22" />
-    <option name="width" value="1075" />
-    <option name="height" value="778" />
+    <option name="x" value="403" />
+    <option name="y" value="23" />
+    <option name="width" value="877" />
+    <option name="height" value="777" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Python</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>PyNoneFunctionAssignmentInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -122,6 +144,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -129,6 +152,26 @@
             <path>
               <item name="Vr2" type="b2602c69:ProjectViewProjectNode" />
               <item name="Vr2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Vr2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Vr2" type="462c0819:PsiDirectoryNode" />
+              <item name="CopyMatchingFiles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Vr2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Vr2" type="462c0819:PsiDirectoryNode" />
+              <item name="FoleyImporter" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Vr2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Vr2" type="462c0819:PsiDirectoryNode" />
+              <item name="GenerateSoundbanks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Vr2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Vr2" type="462c0819:PsiDirectoryNode" />
+              <item name="GetSoundbanksToBuild" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Vr2" type="b2602c69:ProjectViewProjectNode" />
@@ -145,11 +188,15 @@
               <item name="Vr2" type="462c0819:PsiDirectoryNode" />
               <item name="SimpleCreateAndImport" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Vr2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Vr2" type="462c0819:PsiDirectoryNode" />
+              <item name="VoLAMSAutoImport" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -157,14 +204,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/NewComponentTest" />
-      <recent name="$PROJECT_DIR$/FoleyImporter" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/GenerateSoundbanks" />
       <recent name="$PROJECT_DIR$/NewComponentTest" />
       <recent name="E:\Fdrive_Backup_5thNov\LocalWork\Projects\Wwise WAAPI\VR2\Vr2\VoLAMSAutoImport" />
       <recent name="$PROJECT_DIR$/VoLAMSAutoImport" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/NewComponentTest" />
+      <recent name="$PROJECT_DIR$/FoleyImporter" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -179,38 +227,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.HelloWorld_Waapi_New">
-    <configuration name="AutoImport_Foley" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.Generatesoundbanks">
+    <configuration name="Generatesoundbanks" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/FoleyImporter" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/GenerateSoundbanks" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Vr2" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="CreateNewObjects_WithImport" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SimpleCreateAndImport" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Vr2" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SimpleCreateAndImport/CreateNewObjects_WithImport.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GenerateSoundbanks/Generatesoundbanks.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -252,38 +282,56 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="MyWwiseComponent" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="LocaliseWwiseObject" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/HelloWorld" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/VoLAMSAutoImport" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Vr2" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NewComponentTest/MyWwiseComponent.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VoLAMSAutoImport/LocaliseWwiseObject.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="MyWwiseComponent (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Vr2" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MyWwiseComponent.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.CreateNewObjects_WithImport" />
-      <item index="1" class="java.lang.String" itemvalue="Python.AutoImport_Foley" />
-      <item index="2" class="java.lang.String" itemvalue="Python.HelloWorld_Waapi_New" />
-      <item index="3" class="java.lang.String" itemvalue="Python.HelloWorld_Waapi" />
-      <item index="4" class="java.lang.String" itemvalue="Python.MyWwiseComponent" />
+      <item index="0" class="java.lang.String" itemvalue="Python.HelloWorld_Waapi_New" />
+      <item index="1" class="java.lang.String" itemvalue="Python.HelloWorld_Waapi" />
+      <item index="2" class="java.lang.String" itemvalue="Python.MyWwiseComponent (1)" />
+      <item index="3" class="java.lang.String" itemvalue="Python.LocaliseWwiseObject" />
+      <item index="4" class="java.lang.String" itemvalue="Python.Generatesoundbanks" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.HelloWorld_Waapi_New" />
-        <item index="1" class="java.lang.String" itemvalue="Python.MyWwiseComponent" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Generatesoundbanks" />
+        <item index="1" class="java.lang.String" itemvalue="Python.HelloWorld_Waapi_New" />
         <item index="2" class="java.lang.String" itemvalue="Python.HelloWorld_Waapi" />
-        <item index="3" class="java.lang.String" itemvalue="Python.CreateNewObjects_WithImport" />
-        <item index="4" class="java.lang.String" itemvalue="Python.AutoImport_Foley" />
+        <item index="3" class="java.lang.String" itemvalue="Python.LocaliseWwiseObject" />
+        <item index="4" class="java.lang.String" itemvalue="Python.MyWwiseComponent (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -304,18 +352,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="201" y="22" width="1075" height="778" extended-state="0" />
+    <frame x="403" y="23" width="877" height="777" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29032257" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25817758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29575402" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29178885" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24952562" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35431919" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35337242" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -354,18 +403,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py</url>
-          <line>179</line>
+          <line>181</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py</url>
-          <line>119</line>
+          <line>121</line>
           <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/VoLAMSAutoImport/ImportNewAudioFilesAsDialogue_VR2_automated.py</url>
-          <line>181</line>
-          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/VoLAMSAutoImport/ImportNewAudioFilesAsDialogue_VR2_automated.py</url>
@@ -398,70 +442,29 @@
           <option name="timeStamp" value="141" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/VoLAMSAutoImport/LocaliseWwiseObject.py</url>
-          <line>366</line>
-          <option name="timeStamp" value="152" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/SimpleCreateAndImport/CreateNewObjects_WithImport.py</url>
-          <line>131</line>
+          <line>133</line>
           <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/HelloWorld/HelloWorld_Waapi.py</url>
-          <line>95</line>
-          <option name="timeStamp" value="159" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/HelloWorld/HelloWorld_Waapi.py</url>
-          <line>92</line>
-          <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/txaio/_unframework.py</url>
           <line>41</line>
           <option name="timeStamp" value="164" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/VoLAMSAutoImport/LocaliseWwiseObject.py</url>
+          <line>370</line>
+          <option name="timeStamp" value="167" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="165" />
+      <option name="time" value="172" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ak_autobahn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/CleanMissingOriginals.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="88" column="16" lean-forward="true" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/ImportNewAudioFilesAsDialogue_VR2_automated.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4635">
-          <caret line="321" column="8" lean-forward="false" selection-start-line="321" selection-start-column="8" selection-end-line="321" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#1#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CopyMatchingFiles/CopyMatchingFiles.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -495,7 +498,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1#15#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -519,7 +522,7 @@
         <state relative-caret-position="600">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="e#1#15#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -536,7 +539,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#1#15#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -549,83 +552,12 @@
       </provider>
     </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/trollius/base_events.py" />
-    <entry file="file://$PROJECT_DIR$/_waapiTemplateScript.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanks_sample.py" />
-    <entry file="file://$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="998">
-          <caret line="342" column="87" lean-forward="false" selection-start-line="342" selection-start-column="66" selection-end-line="342" selection-end-column="87" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/waapi_SG.py" />
-    <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="153" column="0" lean-forward="true" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-          <folding>
-            <element signature="e#1#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/ImportNewAudioFilesAsDialogue_VR2_automated.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="198" column="51" lean-forward="false" selection-start-line="198" selection-start-column="51" selection-end-line="198" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/waapi_SG.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1581">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/waapi_SG.py" />
     <entry file="file://C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/site-packages/autobahn/wamp/protocol.py" />
     <entry file="file://C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/site-packages/autobahn/websocket/protocol.py" />
     <entry file="file://C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/site-packages/autobahn/__init__.py" />
     <entry file="file://C:/Program Files (x86)/Microsoft Visual Studio/Shared/Python36_64/Lib/site-packages/autobahn/asyncio/wamp.py" />
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/AutoLocaliseWwiseObject.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-504">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/CleanMissingOriginals.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1843">
-          <caret line="88" column="16" lean-forward="false" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/LocaliseWwiseObject.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="266" column="58" lean-forward="false" selection-start-line="266" selection-start-column="58" selection-end-line="266" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/wamp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/wamp.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="606">
@@ -640,55 +572,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/ak_autobahn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SimpleCreateAndImport/CreateNewObjects_WithImport.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="62" column="29" lean-forward="false" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#9#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/ak_autobahn.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/autobahn/asyncio/wamp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2160">
           <caret line="147" column="0" lean-forward="false" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ak_autobahn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="45" column="6" lean-forward="false" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#14#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HelloWorld/HelloWorld_Waapi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
-          <caret line="91" column="26" lean-forward="true" selection-start-line="91" selection-start-column="26" selection-end-line="91" selection-end-column="26" />
-          <folding>
-            <element signature="e#1#15#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -738,7 +626,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -752,38 +639,144 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/NewComponentTest/MyWwiseComponent.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/autobahn/wamp/protocol.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-396">
-          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+        <state relative-caret-position="15">
+          <caret line="1253" column="0" lean-forward="false" selection-start-line="1253" selection-start-column="0" selection-end-line="1253" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/autobahn/wamp/message.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1202" column="0" lean-forward="false" selection-start-line="1202" selection-start-column="0" selection-end-line="1202" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewComponentTest/ak_autobahn.py" />
+    <entry file="file://$PROJECT_DIR$/ak_autobahn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-339">
+          <caret line="45" column="6" lean-forward="false" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_waapiTemplateScript.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="990">
+          <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/AutoLocaliseWwiseObject.py" />
+    <entry file="file://$PROJECT_DIR$/SimpleCreateAndImport/CreateNewObjects_WithImport.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
           <folding>
-            <element signature="e#1294#1332#0" expanded="false" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NewComponentTest/ak_autobahn.py">
+    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/ImportNewAudioFilesAsDialogue_VR2_automated.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-439">
-          <caret line="8" column="69" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="69" />
-          <folding />
+        <state relative-caret-position="60">
+          <caret line="4" column="21" lean-forward="false" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NewComponentTest/MyWwiseComponent.py">
+    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/CleanMissingOriginals.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="58" lean-forward="false" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
-          <folding />
+        <state relative-caret-position="75">
+          <caret line="5" column="21" lean-forward="false" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/waapi_SG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" lean-forward="true" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanks_sample.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-301">
+          <caret line="4" column="28" lean-forward="false" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HelloWorld/HelloWorld_Waapi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NewComponentTest/BaseWwiseComponent.py" />
     <entry file="file://$PROJECT_DIR$/NewComponentTest/HelloWorld_Waapi_New.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="45" column="50" lean-forward="false" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
+        <state relative-caret-position="15">
+          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MyWwiseComponent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetSoundbanksToBuild/GetSoundbanksToBuild.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2020">
+          <caret line="6" column="21" lean-forward="false" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
           <folding>
-            <element signature="e#1#15#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FoleyImporter/AutoImport_Foley.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2293">
+          <caret line="3" column="21" lean-forward="false" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FoleyImporter/ImportFoley_VR2_automated.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2090">
+          <caret line="3" column="21" lean-forward="false" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VoLAMSAutoImport/LocaliseWwiseObject.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="124" column="8" lean-forward="false" selection-start-line="124" selection-start-column="8" selection-end-line="130" selection-end-column="75" />
+          <folding>
+            <element signature="e#23#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GenerateSoundbanks/Generatesoundbanks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
