@@ -76,14 +76,14 @@ class MyComponent(AkComponent):
 
         beginUndoGroup()
 
-        yield from getSelectedWwiseObject()
+        #yield from getSelectedWwiseObject()
 
         #yield from generatesoundbanks("{B9F356E2-E334-48AC-8E3B-0E308A24289E}")
 
-        yield from generatesoundbanks(MyComponent.WwiseParentObject['id'])
+        #yield from generatesoundbanks(MyComponent.WwiseParentObject['id'])
 
         ## Doesn't seem to work with name though
-        # yield from generatesoundbanks(MyComponent.WwiseParentObject['name'])
+        yield from generatesoundbanks('SoundBank:BadJuJu_VO')
 
         endUndoGroup()
 
