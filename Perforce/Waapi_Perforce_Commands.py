@@ -4,12 +4,11 @@ import os
 import asyncio
 from autobahn.asyncio.component import run
 import autobahn.asyncio.wamp
-
-sys.path.append('..')
-
 from ak_autobahn import AkComponent
 from MyWwiseComponent import myWaapiComponent
 from waapi import WAAPI_URI
+
+sys.path.append('..')
 
 
 class MyComponent(AkComponent):
@@ -17,7 +16,7 @@ class MyComponent(AkComponent):
     def onJoin(self, details):
 
         ############# Function definitions #########################################
-        def exit():
+        def myExit():
             self.leave()
 
         def beginUndoGroup():
@@ -79,7 +78,7 @@ class MyComponent(AkComponent):
 
         ############### Exit  #############################
         saveWwiseProject()
-        exit()
+        myExit()
         # self.leave()
 
     def onDisconnect(self):
