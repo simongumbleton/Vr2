@@ -32,26 +32,36 @@ class MyComponent(AkComponent):
         def saveWwiseProject():
             yield from self.call(WAAPI_URI.ak_wwise_core_project_save)
 
-        def getAudioFilesInWwise(IDorPath):
-            # print("Get a list of the audio files currently in the project, under the selected object")
-            arguments = {
-                "from": {"path": [IDorPath]},
-                "transform": [
-                    {"select": ["descendants"]},
-                    {"where": ["type:isIn", ["Sound"]]}
-                ],
-                "options": {
-                    "return": ["name", "id", "type", "path", "sound:originalWavFilePath", "isPlayable",
-                               "audioSource:playbackDuration"]
-                }
+        def getSelectedWwiseObject():
+            args = {
+                "return": ["workunit"]
             }
             try:
-                res = yield from self.call(WAAPI_URI.ak_wwise_core_object_get, **arguments)
+                res = yield from self.call(WAAPI_URI.ak_wwise_ui_getselectedobjects, options=args)
+            except Exception as ex:
+                print("call error: {}".format(ex))
+            else:
+                WwiseObject = res.kwresults["objects"][0]
+                print(WwiseObject)
+                WorkUnitID = WwiseObject["workunit"]["id"]
+                print(WorkUnitID)
+                return WorkUnitID
+
+        def doPerforceOperation(operation, target):
+            # print("Get a list of the audio files currently in the project, under the selected object")
+            arguments = {
+                "command": operation,
+                "objects": [
+                    target
+                ]
+            }
+            try:
+                res = yield from self.call(WAAPI_URI.ak_wwise_ui_commands_execute, **arguments)
             except Exception as ex:
                 print("call error: {}".format(ex))
                 return 0
             else:
-                return res.kwresults["return"]
+                print("Checked out WWU")
 
         ############## End of Function definitions ##############################################
 
@@ -69,10 +79,9 @@ class MyComponent(AkComponent):
 
         beginUndoGroup()
 
-        # Get all the audio files from a Wwise path
-        listOfAudioFiles = yield from getAudioFilesInWwise("\\Actor-Mixer Hierarchy\\")
-        for x in listOfAudioFiles:
-            print(x)
+        WorkUnit = yield from getSelectedWwiseObject()
+
+        yield from doPerforceOperation("WorkgroupCheckoutWWU",WorkUnit)
 
         endUndoGroup()
 
