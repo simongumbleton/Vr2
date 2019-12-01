@@ -292,8 +292,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Perforce/Waapi_Perforce_Commands.py</url>
-          <line>39</line>
-          <option name="timeStamp" value="170" />
+          <line>52</line>
+          <option name="timeStamp" value="172" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Perforce/Waapi_Perforce_Commands.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="173" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -34,7 +34,7 @@ class MyComponent(AkComponent):
 
         def getSelectedWwiseObject():
             args = {
-                "return": ["workunit"]
+                "return": ["workunit", "id"]
             }
             try:
                 res = yield from self.call(WAAPI_URI.ak_wwise_ui_getselectedobjects, options=args)
@@ -45,7 +45,8 @@ class MyComponent(AkComponent):
                 print(WwiseObject)
                 WorkUnitID = WwiseObject["workunit"]["id"]
                 print(WorkUnitID)
-                return WorkUnitID
+                #return WorkUnitID
+                return WwiseObject["id"]
 
         def doPerforceOperation(operation, target):
             # print("Get a list of the audio files currently in the project, under the selected object")
